@@ -1,15 +1,16 @@
 package com.example.cryptopanel
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.widget.ImageView
+import android.widget.ProgressBar
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.*
 import com.example.cryptopanel.Model.Coin
 import com.example.cryptopanel.Retrofit.RetrofitClient
 import com.example.cryptopanel.Retrofit.RetrofitServieces
-import retrofit2.*
-
-private const val TAG = "getting DATA"
+import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,18 +21,34 @@ class MainActivity : AppCompatActivity() {
         val recyclerview: RecyclerView = findViewById(R.id.recycler_view)
         recyclerview.layoutManager = LinearLayoutManager(this)
 
-// создаем объект ретрофит который содержит url и обрабатывает json
-        val retrofitService: RetrofitServieces =
-            RetrofitClient.getClient().create(RetrofitServieces::class.java)
-//    получаем массив Монет из респонс, передаем в массив coins и помещаем в адаптер
-        retrofitService.getCoins().enqueue(object : Callback<List<Coin>> {
-            override fun onResponse(call: Call<List<Coin>>, response: Response<List<Coin>>) {
-                recyclerview.adapter = CryptoPanelAdapter(applicationContext, response.body()!!)
-            }
+        val progress: ProgressBar = findViewById(R.id.progressBar)
+        val logo: ImageView = findViewById(R.id.logo)
+        logo.isVisible = true
+        progress.isVisible = true
 
-            override fun onFailure(call: Call<List<Coin>>, t: Throwable) {
-                Log.e(TAG, "ERRROOORRRR")
-            }
-        })
+        val coinsEmpty: List<Coin> = listOf()
+
+        // 1. Getting data in parallel thread
+        MainScope().launch {
+            val coinsFull = getData()
+            setItems(coinsFull, recyclerview, applicationContext)
+            progress.isVisible = false
+        }
+        recyclerview.adapter = CryptoPanelAdapter(applicationContext, coinsEmpty)
     }
+}
+
+suspend fun getData(): List<Coin> {
+    val retrofitService: RetrofitServieces = RetrofitClient.getClient()
+        .create(RetrofitServieces::class.java)
+    val response = retrofitService.getCoins().body()
+    // imitation long time work
+    delay(2000)
+    return response!!
+}
+
+// 2. Set full list of coins in adapter
+fun setItems(items: List<Coin>, recyclerView: RecyclerView, context: Context) {
+    recyclerView.adapter = CryptoPanelAdapter(context, items)
+    recyclerView.adapter!!.notifyDataSetChanged()
 }

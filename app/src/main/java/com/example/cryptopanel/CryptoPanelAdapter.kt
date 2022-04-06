@@ -25,7 +25,7 @@ class CryptoPanelAdapter(private val context: Context, private val coins: List<C
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.nameCoin.text = coins[position].name
-        holder.priceCoin.text = coins[position].current_price.toString()
+        holder.priceCoin.text = "%.2f".format(coins[position].current_price)
         holder.nameCoin.setOnClickListener({
             val intent = Intent(context, SecondActivity::class.java)
             intent.putExtra("c", coins[position])

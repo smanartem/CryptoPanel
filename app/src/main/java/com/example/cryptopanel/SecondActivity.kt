@@ -20,8 +20,8 @@ class SecondActivity() : AppCompatActivity() {
 
         nameS.text = coin?.name
         idS.text = coin?.id
-        priceS.text = coin?.current_price.toString()
-        marketCup.text = "Market Cup \n ${coin?.market_cap.toString()}"
-        change.text = "Day change \n ${ coin?.price_change_24h.toString() }"
+        priceS.text = "%.2f".format(coin?.current_price)
+        marketCup.text = "Market Cup \n ${"%.2f".format(coin?.market_cap)}"
+        change.text = "Day change \n ${ "%.2f".format(coin?.price_change_24h) }"
     }
 }
