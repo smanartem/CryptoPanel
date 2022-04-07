@@ -1,4 +1,4 @@
-package com.example.cryptopanel.Retrofit
+package com.example.cryptopanel.retrofit
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

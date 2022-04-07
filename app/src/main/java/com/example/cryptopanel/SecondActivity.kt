@@ -3,7 +3,7 @@ package com.example.cryptopanel
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import com.example.cryptopanel.Model.Coin
+import com.example.cryptopanel.model.Coin
 
 class SecondActivity() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

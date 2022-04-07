@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cryptopanel.Model.Coin
+import com.example.cryptopanel.model.Coin
 
 class CryptoPanelAdapter(private val context: Context, private val coins: List<Coin>) :
     RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>() {

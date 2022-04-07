@@ -1,4 +1,4 @@
-package com.example.cryptopanel.Model
+package com.example.cryptopanel.model
 
 import java.io.Serializable
 

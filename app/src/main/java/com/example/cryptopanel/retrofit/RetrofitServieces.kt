@@ -1,6 +1,6 @@
-package com.example.cryptopanel.Retrofit
+package com.example.cryptopanel.retrofit
 
-import com.example.cryptopanel.Model.Coin
+import com.example.cryptopanel.model.Coin
 import retrofit2.Response
 import retrofit2.http.GET
 
