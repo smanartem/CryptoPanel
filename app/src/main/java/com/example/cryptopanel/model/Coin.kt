@@ -29,7 +29,7 @@ data class Coin(
     val atl: Double,
     val atl_change_percentage: Double,
     val atl_date: String,
-    //  в РОИ ошибка, т.к. в нем открывается еще один список параметров
+    //  error because ROI contain array
     //           val roi: String,
     val times: Double,
     val currency: String,
@@ -37,12 +37,4 @@ data class Coin(
     val last_updated: String,
 ) : Serializable
 
-//@SerializedName("id")
-//var id: String? = null
-//
-//@SerializedName("symbol")
-//var symbol: String? = null
-//
-//@SerializedName("name")
-//var name: String? = null
 

@@ -9,12 +9,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptopanel.model.Coin
 
-class CryptoPanelAdapter(private val context: Context, private val coins: List<Coin>) :
-    RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>() {
+class CryptoPanelAdapter(private val context: Context) : RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>() {
+
+    var coins = mutableListOf<Coin>()
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nameCoin: TextView = view.findViewById(R.id.nameCoin)
         val priceCoin: TextView = view.findViewById(R.id.priceCoin)
+    }
+
+    fun setCoinsList(coins: List<Coin>) {
+        this.coins = coins.toMutableList()
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -26,14 +32,14 @@ class CryptoPanelAdapter(private val context: Context, private val coins: List<C
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.nameCoin.text = coins[position].name
         holder.priceCoin.text = "%.2f".format(coins[position].current_price)
-        holder.nameCoin.setOnClickListener({
+        holder.nameCoin.setOnClickListener {
             val intent = Intent(context, SecondActivity::class.java)
-            intent.putExtra("c", coins[position])
+            intent.putExtra("key", coins[position])
             holder.nameCoin.context.startActivity(intent)
-        })
+        }
     }
 
     override fun getItemCount(): Int {
-        return if (coins.isNotEmpty()) coins.size else 0
+        return coins.size
     }
 }
