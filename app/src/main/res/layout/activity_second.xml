@@ -6,23 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".SecondActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/second_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="8dp"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        tools:ignore="MissingConstraints" />
+
     <TextView
         android:id="@+id/nameS"
         android:layout_width="0dp"
         android:layout_height="128dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="8dp"
         android:text="name"
         android:textAlignment="gravity"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/second_toolbar" />
 
     <TextView
         android:id="@+id/idS"
         android:layout_width="128dp"
         android:layout_height="64dp"
+        android:paddingLeft="8dp"
         android:text="id"
         android:textAlignment="viewStart"
         android:textSize="20sp"
@@ -33,6 +48,7 @@
         android:id="@+id/priceS"
         android:layout_width="0dp"
         android:layout_height="62dp"
+        android:paddingLeft="8dp"
         android:text="price"
         android:textAlignment="viewEnd"
         android:textIsSelectable="true"
@@ -48,6 +64,7 @@
         android:id="@+id/marketCupS"
         android:layout_width="0dp"
         android:layout_height="64dp"
+        android:paddingLeft="8dp"
         android:text="marketcup"
         android:textAlignment="viewStart"
         android:textSize="20sp"
@@ -59,6 +76,7 @@
         android:id="@+id/priceChangeS"
         android:layout_width="0dp"
         android:layout_height="64dp"
+        android:paddingLeft="8dp"
         android:text="priceChange"
         android:textAlignment="viewStart"
         android:textSize="20sp"

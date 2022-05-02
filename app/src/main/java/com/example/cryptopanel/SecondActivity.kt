@@ -10,6 +10,9 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
+        setSupportActionBar(findViewById(R.id.second_toolbar))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val coin = intent.getSerializableExtra("key") as? Coin
 
         val nameS: TextView = findViewById(R.id.nameS)
@@ -20,8 +23,8 @@ class SecondActivity : AppCompatActivity() {
 
         nameS.text = coin?.name
         idS.text = coin?.id
-        priceS.text = "%.2f".format(coin?.current_price)
-        marketCup.text = "Market Cup \n ${"%.2f".format(coin?.market_cap)}"
-        change.text = "Day change \n ${ "%.2f".format(coin?.price_change_24h) }"
+        priceS.text = "%.3f".format(coin?.current_price)
+        marketCup.text = "Market Cup \n ${"%.3f".format(coin?.market_cap)}"
+        change.text = "Day change \n ${ "%.3f".format(coin?.price_change_24h) }"
     }
 }

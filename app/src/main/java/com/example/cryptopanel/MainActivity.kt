@@ -2,7 +2,9 @@ package com.example.cryptopanel
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.widget.*
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.*
@@ -11,6 +13,7 @@ import com.example.cryptopanel.model.Coin
 
 class MainActivity : AppCompatActivity() {
     val adapter = CryptoPanelAdapter(this)
+    val viewModel = CryptoPanelViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,24 +23,30 @@ class MainActivity : AppCompatActivity() {
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.adapter = adapter
 
-        val searchView: SearchView = findViewById(R.id.searchView)
+        setSupportActionBar(findViewById(R.id.toolbar))
 
         val progress: ProgressBar = findViewById(R.id.progressBar)
         progress.isVisible = true
 
-        val vm = CryptoPanelViewModel()
-        vm.coinsList.observe(this, Observer {
+        viewModel.coinsList.observe(this, Observer {
             adapter.setCoinsList(it)
             progress.isVisible = false
         })
-        vm.getAllCoins()
+        viewModel.getAllCoins()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_resource, menu)
+
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem.actionView as SearchView
 
         val searchAdapter = ArrayAdapter<String>(this, R.layout.recyclerview_item)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchAdapter.filter.filter(query)
                 if (query!!.isNotEmpty()) {
-                    val sortedCoins = sortByName(vm.coinsList.value!!, query)
+                    val sortedCoins = sortByName(viewModel.coinsList.value!!, query)
                     adapter.setCoinsList(sortedCoins)
                 }
                 return false
@@ -45,22 +54,14 @@ class MainActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText.isNullOrEmpty()) {
-                adapter.setCoinsList(vm.coinsList.value!!)
+                    adapter.setCoinsList(viewModel.coinsList.value!!)
                 }
                 searchAdapter.filter.filter(newText)
                 return false
             }
         })
-    }
-}
 
-
-fun sortByName(items: List<Coin>, chars: String): List<Coin> {
-    val tempArray = mutableListOf<Coin>()
-    items.forEach {
-        if (it.name.lowercase().contains(chars.lowercase())) {
-            tempArray.add(it)
-        }
+        return super.onCreateOptionsMenu(menu)
     }
-    return tempArray
+
 }
