@@ -1,20 +1,20 @@
 package com.example.cryptopanel
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.widget.*
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.*
-import com.example.cryptopanel.model.Coin
-
+import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 
 class MainActivity : AppCompatActivity() {
     val adapter = CryptoPanelAdapter(this)
     val viewModel = CryptoPanelViewModel()
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -22,16 +22,21 @@ class MainActivity : AppCompatActivity() {
         val recyclerview: RecyclerView = findViewById(R.id.recycler_view)
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.adapter = adapter
+        recyclerview.setHasFixedSize(true)
+
+        val mDecoration = DividerItemDecoration(this, VERTICAL)
+        mDecoration.setDrawable(resources.getDrawable(R.drawable.divider_drawable))
+        recyclerview.addItemDecoration(mDecoration)
 
         setSupportActionBar(findViewById(R.id.toolbar))
 
         val progress: ProgressBar = findViewById(R.id.progressBar)
         progress.isVisible = true
 
-        viewModel.coinsList.observe(this, Observer {
+        viewModel.coinsList.observe(this) {
             adapter.setCoinsList(it)
             progress.isVisible = false
-        })
+        }
         viewModel.getAllCoins()
     }
 
@@ -63,5 +68,4 @@ class MainActivity : AppCompatActivity() {
 
         return super.onCreateOptionsMenu(menu)
     }
-
 }

@@ -5,11 +5,14 @@
       <map>
         <entry key="..\:/Users/ArtsemStudy/AndroidStudioProjects/CryptoPanel/app/src/main/res/drawable-anydpi/ic_search.xml" value="0.2565" />
         <entry key="..\:/Users/ArtsemStudy/AndroidStudioProjects/CryptoPanel/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2565" />
+        <entry key="..\:/Users/ArtsemStudy/AndroidStudioProjects/CryptoPanel/app/src/main/res/drawable/divider_drawable.xml" value="0.2565" />
         <entry key="..\:/Users/ArtsemStudy/AndroidStudioProjects/CryptoPanel/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2565" />
         <entry key="..\:/Users/ArtsemStudy/AndroidStudioProjects/CryptoPanel/app/src/main/res/drawable/ic_search.xml" value="0.2565" />
         <entry key="..\:/Users/ArtsemStudy/AndroidStudioProjects/CryptoPanel/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/ArtsemStudy/AndroidStudioProjects/CryptoPanel/app/src/main/res/layout/activity_second.xml" value="0.264" />
         <entry key="..\:/Users/ArtsemStudy/AndroidStudioProjects/CryptoPanel/app/src/main/res/layout/activity_starting.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ArtsemStudy/AndroidStudioProjects/CryptoPanel/app/src/main/res/layout/divider_drawable.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ArtsemStudy/AndroidStudioProjects/CryptoPanel/app/src/main/res/layout/fragment_details.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ArtsemStudy/AndroidStudioProjects/CryptoPanel/app/src/main/res/layout/recyclerview_item.xml" value="0.264" />
         <entry key="..\:/Users/ArtsemStudy/AndroidStudioProjects/CryptoPanel/app/src/main/res/layout/start_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ArtsemStudy/AndroidStudioProjects/CryptoPanel/app/src/main/res/menu/menu_resource.xml" value="0.25416666666666665" />
