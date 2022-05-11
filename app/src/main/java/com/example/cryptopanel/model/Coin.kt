@@ -35,6 +35,7 @@ data class Coin(
     val currency: String,
     val percentage: Double,
     val last_updated: String,
+    val sparkline_in_7d: Price,
 ) : Serializable
 
 

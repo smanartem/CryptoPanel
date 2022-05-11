@@ -23,11 +23,11 @@
         android:id="@+id/nameS"
         android:layout_width="0dp"
         android:layout_height="128dp"
-        android:layout_marginTop="8dp"
         android:paddingLeft="8dp"
         android:textAlignment="gravity"
         android:textSize="48sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/idS"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/second_toolbar" />
@@ -81,4 +81,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/marketCupS" />
+
+    <com.robinhood.spark.SparkView
+        android:id="@+id/spark"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceChangeS"
+        app:layout_constraintVertical_bias="0.076"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

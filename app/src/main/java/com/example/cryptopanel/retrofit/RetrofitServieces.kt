@@ -5,6 +5,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface RetrofitServieces {
-    @GET("coins/markets?vs_currency=usd")
+    @GET("coins/markets?vs_currency=usd&sparkline=true")
     suspend fun getCoins(): Response<List<Coin>>
 }

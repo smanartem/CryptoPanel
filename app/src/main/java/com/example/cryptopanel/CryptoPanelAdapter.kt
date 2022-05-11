@@ -48,11 +48,11 @@ class CryptoPanelAdapter(private val context: Context) :
         return coins.size
     }
 
-    fun setColor(x: Double): Int{
-        if(x>0){
-            return Color.GREEN
-        }else{
-            return Color.RED
-        }
+}
+fun setColor(x: Double): Int {
+    return if (x > 0) {
+        Color.GREEN
+    } else {
+        Color.RED
     }
 }
