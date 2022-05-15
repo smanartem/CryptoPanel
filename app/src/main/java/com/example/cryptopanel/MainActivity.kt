@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         val progress: ProgressBar = findViewById(R.id.progressBar)
         progress.isVisible = true
 
+
         viewModel.coinsList.observe(this) {
             adapter.setCoinsList(it)
             progress.isVisible = false

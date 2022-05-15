@@ -20,7 +20,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/nameS"
+        android:id="@id/nameS"
         android:layout_width="0dp"
         android:layout_height="128dp"
         android:paddingLeft="8dp"
