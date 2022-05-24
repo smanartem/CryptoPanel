@@ -1,7 +1,9 @@
-package com.example.cryptopanel
+package com.example.cryptopanel.viewModels
 
+import android.app.Application
+import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.cryptopanel.model.Coin
 import com.example.cryptopanel.retrofit.RetrofitClient
 import com.example.cryptopanel.retrofit.RetrofitServieces
@@ -9,12 +11,16 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CryptoPanelViewModel : ViewModel() {
+class CryptoPanelViewModel(application: Application) : AndroidViewModel(application) {
     var coinsList = MutableLiveData<List<Coin>>()
 
     fun getAllCoins() {
-        CoroutineScope(Dispatchers.IO).launch {
-            coinsList.postValue(getData()!!)
+
+        if (coinsList.value.isNullOrEmpty()) {
+            CoroutineScope(Dispatchers.IO).launch {
+                Log.d("TAG", "Coroutine started")
+                coinsList.postValue(getData()!!)
+            }
         }
     }
 

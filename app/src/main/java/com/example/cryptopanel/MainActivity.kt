@@ -3,16 +3,19 @@ package com.example.cryptopanel
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.widget.*
+import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.*
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
+import com.example.cryptopanel.viewModels.CryptoPanelViewModel
 
 class MainActivity : AppCompatActivity() {
     val adapter = CryptoPanelAdapter(this)
-    val viewModel = CryptoPanelViewModel()
+    val model: CryptoPanelViewModel by viewModels()
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,17 +36,18 @@ class MainActivity : AppCompatActivity() {
         val progress: ProgressBar = findViewById(R.id.progressBar)
         progress.isVisible = true
 
-
-        viewModel.coinsList.observe(this) {
+        model.coinsList.observe(this) {
+            Log.d("TAG", "Observer started")
             adapter.setCoinsList(it)
             progress.isVisible = false
         }
-        viewModel.getAllCoins()
+         model.getAllCoins()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_resource, menu)
 
+        // SearchView
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
 
@@ -52,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchAdapter.filter.filter(query)
                 if (query!!.isNotEmpty()) {
-                    val sortedCoins = sortByName(viewModel.coinsList.value!!, query)
+                    val sortedCoins = sortByName(model.coinsList.value!!, query)
                     adapter.setCoinsList(sortedCoins)
                 }
                 return false
@@ -60,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText.isNullOrEmpty()) {
-                    adapter.setCoinsList(viewModel.coinsList.value!!)
+                    adapter.setCoinsList(model.coinsList.value!!)
                 }
                 searchAdapter.filter.filter(newText)
                 return false

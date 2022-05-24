@@ -15,7 +15,7 @@ import com.robinhood.spark.SparkView
 class CryptoPanelAdapter(private val context: Context) :
     RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>() {
 
-    var coins = mutableListOf<Coin>()
+    private var coins = listOf<Coin>()
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nameCoin: TextView = view.findViewById(R.id.nameCoin)
@@ -25,9 +25,10 @@ class CryptoPanelAdapter(private val context: Context) :
     }
 
     fun setCoinsList(coins: List<Coin>) {
-        this.coins = coins.toMutableList()
+        this.coins = coins
         notifyDataSetChanged()
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context)
