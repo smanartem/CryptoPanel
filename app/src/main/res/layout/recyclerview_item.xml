@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="64dp"
     android:layout_margin="0dp"
-    android:backgroundTint="@color/black">
-
+    android:backgroundTint="@color/black"
+    android:background="@color/black">
     <LinearLayout
 
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
 
         <com.robinhood.spark.SparkView
             android:id="@+id/spark_in_recycler"
-            android:layout_width="145dp"
+            android:layout_width="120dp"
             android:layout_height="match_parent" />
 
         <LinearLayout
@@ -36,6 +36,7 @@
 
             <TextView
                 android:id="@+id/priceCoin"
+                style="@style/TextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:gravity="end"

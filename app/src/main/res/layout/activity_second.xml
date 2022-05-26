@@ -4,96 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".SecondActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/second_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_marginTop="8dp"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/Theme.CryptoPanel"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@id/nameS"
-        android:layout_width="0dp"
-        android:layout_height="128dp"
-        android:paddingLeft="8dp"
-        android:textAlignment="gravity"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/idS"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/second_toolbar" />
-
-    <TextView
-        android:id="@+id/idS"
-        android:layout_width="128dp"
-        android:layout_height="64dp"
-        android:paddingLeft="8dp"
-        android:textAlignment="viewStart"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameS" />
-
-    <TextView
-        android:id="@+id/priceS"
-        android:layout_width="0dp"
-        android:layout_height="62dp"
-        android:paddingLeft="8dp"
-        android:text="price"
-        android:textAlignment="viewEnd"
-        android:textIsSelectable="true"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/idS"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/idS"
-        app:layout_constraintTop_toBottomOf="@+id/nameS"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/marketCupS"
-        android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:paddingLeft="8dp"
-        android:text="marketcup"
-        android:textAlignment="viewStart"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priceS" />
-
-    <TextView
-        android:id="@+id/priceChangeS"
-        android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:paddingLeft="8dp"
-        android:text="priceChange"
-        android:textAlignment="viewStart"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/marketCupS" />
 
     <com.robinhood.spark.SparkView
         android:id="@+id/spark"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priceChangeS"
-        app:layout_constraintVertical_bias="0.076"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="409dp"
+        android:layout_height="180dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/second_toolbar">
+
+        <TextView
+            android:id="@+id/nameS"
+            style="@style/TextViewStyle"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/priceS"
+            style="@style/TextViewStyle"
+            android:gravity="end"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="128dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/marketCupS"
+            style="@style/TextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="64dp" />
+
+        <TextView
+            android:id="@+id/priceChangeS"
+            style="@style/TextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
