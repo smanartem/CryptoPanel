@@ -6,11 +6,11 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptopanel.model.Coin
-import com.robinhood.spark.SparkAdapter
-import com.robinhood.spark.SparkView
+import com.squareup.picasso.Picasso
 
 class CryptoPanelAdapter(private val context: Context) :
     RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>() {
@@ -21,7 +21,8 @@ class CryptoPanelAdapter(private val context: Context) :
         val nameCoin: TextView = view.findViewById(R.id.nameCoin)
         val priceCoin: TextView = view.findViewById(R.id.priceCoin)
         val dayChange: TextView = view.findViewById(R.id.dayChange)
-        val sparkRecycler: SparkView = view.findViewById(R.id.spark_in_recycler)
+        val image: ImageView = view.findViewById(R.id.imageView)
+        val number: TextView = view.findViewById(R.id.number)
     }
 
     fun setCoinsList(coins: List<Coin>) {
@@ -37,10 +38,10 @@ class CryptoPanelAdapter(private val context: Context) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val adapter: SparkAdapter = SparklineAdapter(coins[position].sparkline_in_7d.price)
-        holder.sparkRecycler.adapter = adapter
-        holder.sparkRecycler.lineColor = setColor(coins[position].price_change_24h)
-
+        holder.number.text = buildString {
+        append("#")
+        append(position+1)
+    }
         holder.dayChange.text = "%.2f".format(coins[position].price_change_24h)
         holder.dayChange.setTextColor(setColor(coins[position].price_change_24h))
         holder.nameCoin.text = coins[position].name
@@ -50,6 +51,11 @@ class CryptoPanelAdapter(private val context: Context) :
             intent.putExtra("key", coins[position])
             holder.nameCoin.context.startActivity(intent)
         }
+
+        Picasso.get()
+            .load(coins[position].image)
+            .resize(80, 80)
+            .into(holder.image)
     }
 
     override fun getItemCount(): Int {

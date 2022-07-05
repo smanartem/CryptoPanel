@@ -2,10 +2,12 @@ package com.example.cryptopanel
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.cryptopanel.model.Coin
 import com.robinhood.spark.SparkAdapter
 import com.robinhood.spark.SparkView
+import com.squareup.picasso.Picasso
 
 class SecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,12 +26,20 @@ class SecondActivity : AppCompatActivity() {
 
         val nameS: TextView = findViewById(R.id.nameS)
         val priceS: TextView = findViewById(R.id.priceS)
-        val marketCup: TextView = findViewById(R.id.marketCupS)
         val change: TextView = findViewById(R.id.priceChangeS)
+        val imageViewS: ImageView = findViewById(R.id.imageViewS)
 
-        nameS.text = "${coin.name} \n${"usd".toLowerCase()}"
-        priceS.text = "%.2f".format(coin?.current_price)
-        marketCup.text = "Market Cup \n${"%.0f".format(coin?.market_cap)}"
-        change.text = "Day change \n${"%.2f".format(coin?.price_change_24h)}"
+        nameS.text = coin.name
+        priceS.text = buildString {
+            append("%.2f")
+        }.format(coin.current_price)
+        change.text = buildString {
+            append("%.2f")
+        }.format(coin.price_change_24h)
+        change.setTextColor(setColor(coin.price_change_24h))
+        Picasso.get()
+            .load(coin.image)
+            .resize(100, 100)
+            .into(imageViewS)
     }
 }

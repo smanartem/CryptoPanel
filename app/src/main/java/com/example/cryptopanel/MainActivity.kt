@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             adapter.setCoinsList(it)
             progress.isVisible = false
         }
-         model.getAllCoins()
+        model.getAllCoins()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
