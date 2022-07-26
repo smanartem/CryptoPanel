@@ -4,26 +4,20 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cryptopanel.databinding.RecyclerviewItemBinding
 import com.example.cryptopanel.model.Coin
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
 class CryptoPanelAdapter(private val context: Context) :
     RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>() {
 
     private var coins = listOf<Coin>()
 
-    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val nameCoin: TextView = view.findViewById(R.id.nameCoin)
-        val priceCoin: TextView = view.findViewById(R.id.priceCoin)
-        val dayChange: TextView = view.findViewById(R.id.dayChange)
-        val image: ImageView = view.findViewById(R.id.imageView)
-        val number: TextView = view.findViewById(R.id.number)
-    }
+    inner class MyViewHolder(binding: RecyclerviewItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     fun setCoinsList(coins: List<Coin>) {
         this.coins = coins
@@ -32,30 +26,34 @@ class CryptoPanelAdapter(private val context: Context) :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.recyclerview_item, parent, false)
-        return MyViewHolder(itemView)
+        val binding =
+            RecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.number.text = buildString {
-        append("#")
-        append(position+1)
-    }
-        holder.dayChange.text = "%.2f".format(coins[position].price_change_24h)
-        holder.dayChange.setTextColor(setColor(coins[position].price_change_24h))
-        holder.nameCoin.text = coins[position].name
-        holder.priceCoin.text = "%.2f".format(coins[position].current_price)
-        holder.itemView.setOnClickListener {
-            val intent = Intent(context, SecondActivity::class.java)
-            intent.putExtra("key", coins[position])
-            holder.nameCoin.context.startActivity(intent)
-        }
+        with(holder) {
+            with(coins[position]) {
+                itemView.number.text = buildString {
+                    append("#")
+                    append(position + 1)
+                }
+                itemView.dayChange.text = "%.2f".format(this.price_change_24h)
+                itemView.dayChange.setTextColor(setColor(this.price_change_24h))
+                itemView.nameCoin.text = this.name
+                itemView.priceCoin.text = "%.2f".format(this.current_price)
+                itemView.setOnClickListener {
+                    val intent = Intent(context, SecondActivity::class.java)
+                    intent.putExtra("key", this)
+                    itemView.nameCoin.context.startActivity(intent)
+                }
 
-        Picasso.get()
-            .load(coins[position].image)
-            .resize(80, 80)
-            .into(holder.image)
+                Picasso.get()
+                    .load(this.image)
+                    .resize(80, 80)
+                    .into(itemView.imageView)
+            }
+        }
     }
 
     override fun getItemCount(): Int {

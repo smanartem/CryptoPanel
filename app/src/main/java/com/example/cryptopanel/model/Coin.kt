@@ -29,8 +29,6 @@ data class Coin(
     val atl: Double,
     val atl_change_percentage: Double,
     val atl_date: String,
-    //  error because ROI contain array
-    //           val roi: String,
     val times: Double,
     val currency: String,
     val percentage: Double,

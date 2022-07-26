@@ -16,4 +16,5 @@ class SparklineAdapter(private val yData: ArrayList<Double>) : SparkAdapter() {
     override fun getY(index: Int): Float {
         return yData[index].toFloat()
     }
+
 }

@@ -81,6 +81,7 @@
             android:textSize="32sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/priceS"
             app:layout_constraintStart_toEndOf="@+id/priceS" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
