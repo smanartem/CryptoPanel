@@ -1,6 +1,5 @@
 package com.example.cryptopanel
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -11,19 +10,17 @@ import com.example.cryptopanel.model.Coin
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
-class CryptoPanelAdapter(private val context: Context) :
+class CryptoPanelAdapter() :
     RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>() {
-
     private var coins = listOf<Coin>()
 
     inner class MyViewHolder(binding: RecyclerviewItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    fun setCoinsList(coins: List<Coin>) {
-        this.coins = coins
+    fun setCoinsList(gettingCoins: List<Coin>) {
+        this.coins = gettingCoins
         notifyDataSetChanged()
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding =
@@ -43,9 +40,9 @@ class CryptoPanelAdapter(private val context: Context) :
                 itemView.nameCoin.text = this.name
                 itemView.priceCoin.text = "%.2f".format(this.current_price)
                 itemView.setOnClickListener {
-                    val intent = Intent(context, SecondActivity::class.java)
+                    val intent = Intent(itemView.context, SecondActivity::class.java)
                     intent.putExtra("key", this)
-                    itemView.nameCoin.context.startActivity(intent)
+                    itemView.context.startActivity(intent)
                 }
 
                 Picasso.get()
@@ -59,7 +56,6 @@ class CryptoPanelAdapter(private val context: Context) :
     override fun getItemCount(): Int {
         return coins.size
     }
-
 }
 
 fun setColor(x: Double): Int {

@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CryptoPanelViewModel(application: Application) : AndroidViewModel(application) {
-    var coinsList = MutableLiveData<List<Coin>>()
+    val coinsList = MutableLiveData<List<Coin>>()
 
     fun getAllCoins() {
 
@@ -20,8 +20,21 @@ class CryptoPanelViewModel(application: Application) : AndroidViewModel(applicat
             }
         }
     }
+
+    fun setSortArray(item: List<Coin>){
+        coinsList.value = item
+    }
+
+    fun refresh(){
+        CoroutineScope(Dispatchers.IO).launch {
+            coinsList.postValue(getData()!!)
+        }
+    }
+
 }
 
 suspend fun getData(): List<Coin> {
     return RetrofitClient.coinGeckoApi.getCoins().body()!!
 }
+
+
