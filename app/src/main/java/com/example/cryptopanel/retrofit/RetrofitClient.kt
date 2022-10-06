@@ -9,7 +9,7 @@ object RetrofitClient {
 
     fun init() {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.coingecko.com/api/v3/")
+            .baseUrl("https://example.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

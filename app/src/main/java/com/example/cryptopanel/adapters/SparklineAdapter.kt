@@ -1,4 +1,4 @@
-package com.example.cryptopanel
+package com.example.cryptopanel.adapters
 
 import com.robinhood.spark.SparkAdapter
 

@@ -2,6 +2,8 @@ package com.example.cryptopanel
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.cryptopanel.adapters.SparklineAdapter
+import com.example.cryptopanel.adapters.setColor
 import com.example.cryptopanel.databinding.ActivitySecondBinding
 import com.example.cryptopanel.model.Coin
 import com.robinhood.spark.SparkAdapter
@@ -9,6 +11,7 @@ import com.squareup.picasso.Picasso
 
 class SecondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySecondBinding.inflate(layoutInflater)
@@ -17,7 +20,7 @@ class SecondActivity : AppCompatActivity() {
         setSupportActionBar(binding.secondToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val coin = intent.getSerializableExtra("key") as? Coin
+        val coin = intent.getSerializableExtra("coin") as? Coin
 
         val adapter: SparkAdapter = SparklineAdapter(coin!!.sparkline_in_7d.price)
         binding.spark.lineColor = setColor(coin.price_change_24h)

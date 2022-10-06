@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val model: CryptoPanelViewModel by viewModels()
+    private val viewModel: CryptoPanelViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,14 +55,14 @@ class MainActivity : AppCompatActivity() {
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query!!.isNotEmpty()) {
-                    val sortedArray = sortByName(model.coinsList.value!!, query)
-                    model.setSortArray(sortedArray)
+                    val sortedArray = sortByName(viewModel.coinsList.value!!, query)
+                    viewModel.setSortArray(sortedArray)
                 }
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText.isNullOrEmpty()) model.refresh()
+                if (newText.isNullOrEmpty()) viewModel.refresh()
                 return true
             }
         })
