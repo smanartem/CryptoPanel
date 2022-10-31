@@ -7,4 +7,4 @@ This app present info about crypto currency, and can see latest news about it.
 Data from CoinGecko API.
 
 
-MVVM, Retrofit2, Picasso, ViewPager2, RecyclerView, Sparkline, Coroutines.
+MVVM, Retrofit2, Picasso, ViewPager2, RecyclerView, DiffUtils, Sparkline, Coroutines, LiveData, single activity, navigation.
