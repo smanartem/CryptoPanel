@@ -2,7 +2,10 @@ package com.example.cryptopanel.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cryptopanel.R
 import com.example.cryptopanel.databinding.ItemArticleBinding
 import com.example.cryptopanel.model.Article
 import com.example.cryptopanel.model.NewsResponse
@@ -32,6 +35,10 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.MyViewHolder>() {
                     .load(urlToImage)
                     .resize(100, 100)
                     .into(ivArticleImage)
+            }
+            holder.itemView.setOnClickListener{view ->
+                view.findNavController().navigate(R.id.action_fragmentNews_to_fragmentNewsDetails,
+                bundleOf("url" to url, "title" to title))
             }
         }
     }

@@ -1,13 +1,14 @@
 package com.example.cryptopanel.adapters
 
-import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptopanel.MyDiffUtil
-import com.example.cryptopanel.SecondActivity
+import com.example.cryptopanel.R
 import com.example.cryptopanel.databinding.ItemCurrencyBinding
 import com.example.cryptopanel.model.Coin
 import com.squareup.picasso.Picasso
@@ -42,10 +43,9 @@ class CryptoPanelAdapter : RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>
                 itemView.dayChange.setTextColor(setColor(this.price_change_percentage_24h))
                 itemView.nameCoin.text = this.name
                 itemView.priceCoin.text = doubleToString(this.current_price)
-                itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, SecondActivity::class.java)
-                    intent.putExtra("coin", this)
-                    itemView.context.startActivity(intent)
+                itemView.setOnClickListener {view ->
+                    view.findNavController().navigate(R.id.action_fragmentMain_to_fragmentCoinDetails,
+                    bundleOf("id" to position, "name" to this.name))
                 }
 
                 Picasso.get()

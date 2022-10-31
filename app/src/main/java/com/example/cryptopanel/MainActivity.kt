@@ -1,19 +1,24 @@
 package com.example.cryptopanel
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.viewModels
-import androidx.fragment.app.*
-import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import com.example.cryptopanel.databinding.ActivityMainBinding
 import com.example.cryptopanel.viewModels.CryptoPanelViewModel
-import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: CryptoPanelViewModel by viewModels()
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,38 +26,33 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        val pagerAdapter = MainActivityPagerAdapter(this)
-        binding.viewPager.adapter = pagerAdapter
-        binding.viewPager.currentItem = 0
-        TabLayoutMediator(tabs, viewPager) { tab, position ->
-            tab.text = if (position == 0) {
-                "Coins"
-            } else {
-                "News"
+        tabLayout?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab?.position == 0) {
+                    findNavController(fragment_container_view.id).navigate(R.id.fragmentMain)
+                } else {
+                    findNavController(fragment_container_view.id).navigate(R.id.fragmentNews)
+                }
             }
-        }.attach()
-    }
 
-    private inner class MainActivityPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
-        override fun getItemCount(): Int = 2
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
 
-        override fun createFragment(position: Int): Fragment {
-            return if (position == 0) {
-                FragmentMain()
-            } else {
-                FragmentNews()
-            }
-        }
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
+
+        val navHost =
+            supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
+        navController = navHost.navController
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_resource, menu)
-
         val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
+        val searchView = searchItem.actionView as SearchView
 
-        searchView.setOnQueryTextListener(object :
-            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query!!.isNotEmpty()) {
                     val sortedArray = sortByName(viewModel.coinsList.value!!, query)
@@ -66,7 +66,10 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
-
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
