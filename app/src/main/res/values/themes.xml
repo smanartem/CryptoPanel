@@ -1,12 +1,13 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Theme.CryptoPanel" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.CryptoPanel" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimary">@color/green</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/siren</item>
+        <item name="colorSecondary">@color/teal_200</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/pureBlue</item>
+        <item name="android:statusBarColor">@color/greenDark</item>
         <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/black</item>
     </style>
 </resources>

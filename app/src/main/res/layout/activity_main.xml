@@ -10,15 +10,12 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/pureBlue"
-        android:theme="@style/Theme.CryptoPanel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-    </androidx.appcompat.widget.Toolbar>
+        android:background="?attr/colorPrimary"
+        />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_view"
@@ -36,23 +33,22 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/pureBlue"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:tabIndicatorColor="@color/green"
-        app:tabMode="fixed"
-        tools:layout_editor_absoluteX="16dp">
+        app:tabMode="fixed">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabCoins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Coins" />
+            android:text="@string/coins_tab_name" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabNews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="News" />
+            android:text="@string/news_tab_name" />
     </com.google.android.material.tabs.TabLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

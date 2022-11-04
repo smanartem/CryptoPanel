@@ -1,31 +1,37 @@
 package com.example.cryptopanel
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.example.cryptopanel.databinding.ActivityMainBinding
+import com.example.cryptopanel.menu.createSearchView
+import com.example.cryptopanel.menu.createSwitchItem
 import com.example.cryptopanel.viewModels.CryptoPanelViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
     private val viewModel: CryptoPanelViewModel by viewModels()
+    private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+        setUpUI()
+        preferences = getSharedPreferences("mode", 0)
+    }
 
+    private fun setUpUI() {
         tabLayout?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab?.position == 0) {
@@ -43,29 +49,15 @@ class MainActivity : AppCompatActivity() {
         val navHost =
             supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHost.navController
-        val appBarConfiguration = AppBarConfiguration(navController.graph)
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
+        NavigationUI.setupActionBarWithNavController(this, navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_resource, menu)
-        val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as SearchView
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query!!.isNotEmpty()) {
-                    val sortedArray = sortByName(viewModel.coinsList.value!!, query)
-                    viewModel.setSortArray(sortedArray)
-                }
-                return true
-            }
+        createSwitchItem(menu, preferences)
+        createSearchView(menu, viewModel)
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText.isNullOrEmpty()) viewModel.refresh()
-                return true
-            }
-        })
         return super.onCreateOptionsMenu(menu)
     }
 

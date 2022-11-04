@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="TextViewStyle">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/whiteShade</item>
-        <item name="android:textSize">24sp</item>
-        <item name="android:gravity">start</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="recycler_style">
+        <item name="android:background">@color/blue</item>
     </style>
 </resources>

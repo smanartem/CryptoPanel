@@ -2,12 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item"
     android:layout_width="match_parent"
-    android:layout_height="64dp"
-    android:background="@color/pureBlue"    >
-
+    android:layout_height="64dp">
     <TextView
         android:id="@+id/number"
-        style="@style/TextViewStyle"
         android:layout_width="50dp"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
@@ -24,7 +21,7 @@
 
     <TextView
         android:id="@+id/nameCoin"
-        style="@style/TextViewStyle"
+
         android:layout_width="220dp"
         android:layout_height="match_parent"
         android:layout_toEndOf="@+id/imageView"
@@ -40,7 +37,6 @@
 
         <TextView
             android:id="@+id/priceCoin"
-            style="@style/TextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:gravity="end"

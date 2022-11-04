@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">CryptoPanel</string>
-
+    <string name="coins_tab_name">Coins</string>
+    <string name="news_tab_name">News</string>
+    <string name="search">Search</string>
+    <string name="switch_theme">Switch theme</string>
+    <string name="dark_mode">dark</string>
+    <string name="light_mode">light</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="switch_yes">dark</string>
+    <string name="switch_no">light</string>
+    <string name="switch_text">light mode</string>
 </resources>
