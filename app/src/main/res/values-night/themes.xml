@@ -5,6 +5,8 @@
         <item name="colorPrimary">@color/pureBlue</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200_dark</item>
+        <item name="colorSecondaryVariant">@color/blue</item>
+        <item name="buttonBarPositiveButtonStyle">@color/pureBlue</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/pureBlue</item>
         <!-- Customize your theme here. -->

@@ -37,6 +37,7 @@ android {
 
 dependencies {
 
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'androidx.fragment:fragment-ktx:1.5.3'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.robinhood.spark:spark:1.2.0'

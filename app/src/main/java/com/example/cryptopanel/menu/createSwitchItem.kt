@@ -1,5 +1,6 @@
 package com.example.cryptopanel.menu
 
+import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.view.Menu
 import androidx.appcompat.app.AppCompatDelegate
@@ -10,7 +11,7 @@ fun createSwitchItem(menu: Menu, preferences: SharedPreferences) {
     val switchItem = menu.findItem(R.id.theme_switch)
     val switch = switchItem.actionView as SwitchCompat
     switch.setText(R.string.switch_text)
-    val mode = preferences.getInt("mode", 0)
+    val mode = preferences.getInt("mode", MODE_PRIVATE)
 
     if (mode == 0) {
         setLightMode()

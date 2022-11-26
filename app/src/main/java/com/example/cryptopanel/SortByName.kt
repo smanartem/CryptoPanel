@@ -10,4 +10,5 @@ fun sortByName(items: List<Coin>, chars: String): List<Coin> {
         }
     }
     return tempArray
+
 }

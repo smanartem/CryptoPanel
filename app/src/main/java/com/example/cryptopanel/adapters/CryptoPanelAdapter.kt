@@ -1,8 +1,8 @@
 package com.example.cryptopanel.adapters
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.CheckedTextView
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -17,11 +17,20 @@ import kotlinx.android.synthetic.main.item_currency.view.*
 class CryptoPanelAdapter : RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>() {
 
     private val differ = AsyncListDiffer(this, MyDiffUtil())
+    lateinit var topList : MutableSet<String>
 
     inner class MyViewHolder(binding: ItemCurrencyBinding) : RecyclerView.ViewHolder(binding.root)
 
     fun setCoinsList(newCoins: List<Coin>) {
         differ.submitList(newCoins)
+    }
+
+    fun setListTop(set: MutableSet<String>) {
+        topList = set
+    }
+
+    fun getListTop(): MutableSet<String> {
+        return topList
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -31,27 +40,40 @@ class CryptoPanelAdapter : RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        with(holder) {
+        with(holder.itemView) {
             with(differ.currentList[position]) {
-                holder.itemView.number.text = buildString {
+                number.text = buildString {
                     append("#")
                     append(position + 1)
                 }
-                itemView.dayChange.text = buildString {
+                dayChange.text = buildString {
                     append("%.2f")
                 }.format(this.price_change_percentage_24h)
-                itemView.dayChange.setTextColor(setColor(this.price_change_percentage_24h))
-                itemView.nameCoin.text = this.name
-                itemView.priceCoin.text = doubleToString(this.current_price)
-                itemView.setOnClickListener {view ->
-                    view.findNavController().navigate(R.id.action_fragmentMain_to_fragmentCoinDetails,
-                    bundleOf("id" to position, "name" to this.name))
+                dayChange.setTextColor(setColor(this.price_change_percentage_24h))
+                nameCoin.text = this.name
+                priceCoin.text = doubleToString(this.current_price)
+
+                setOnClickListener { view ->
+                    view.findNavController().navigate(
+                        R.id.action_fragmentMain_to_fragmentCoinDetails,
+                        bundleOf("id" to position, "name" to this.name)
+                    )
+                }
+
+                if (topList.contains(this.id)) {
+                    checkIsTrue(check)
+                } else {
+                    checkIsFalse(check)
+                }
+
+                check.setOnClickListener {
+                    checkOnClickListener(it.check, topList, this.id)
                 }
 
                 Picasso.get()
                     .load(this.image)
-                    .resize(80, 80)
-                    .into(itemView.imageView)
+                    .resize(100, 100)
+                    .into(imageView)
             }
         }
     }
@@ -59,14 +81,22 @@ class CryptoPanelAdapter : RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>
     override fun getItemCount(): Int = differ.currentList.size
 }
 
-fun setColor(x: Double): Int {
-    return if (x > 0) {
-        Color.GREEN
+fun checkOnClickListener(check: CheckedTextView, topList: MutableSet<String>, id: String) {
+    if (check.isChecked) {
+        checkIsFalse(check)
+        topList.remove(id)
     } else {
-        Color.RED
+        checkIsTrue(check)
+        topList.add(id)
     }
 }
 
-fun doubleToString(price: Double): String {
-    return if (price < 1) "%.6f".format(price) else "%.2f".format(price)
+fun checkIsTrue(check: CheckedTextView) {
+    check.isChecked = true
+    check.setCheckMarkDrawable(R.drawable.star_full)
+}
+
+fun checkIsFalse(check: CheckedTextView) {
+    check.isChecked = false
+    check.setCheckMarkDrawable(R.drawable.star_empty)
 }

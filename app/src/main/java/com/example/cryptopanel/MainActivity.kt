@@ -3,6 +3,7 @@ package com.example.cryptopanel
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         setUpUI()
-        preferences = getSharedPreferences("mode", 0)
+        preferences = getPreferences(MODE_PRIVATE)
     }
 
     private fun setUpUI() {

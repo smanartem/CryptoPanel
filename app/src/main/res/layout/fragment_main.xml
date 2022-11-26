@@ -14,7 +14,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/trend_buttons_layout" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -24,5 +24,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/trend_buttons_layout"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/topRateButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/colorSecondaryVariant"
+            android:drawableStart="@drawable/ic_star_switcher"
+            android:text="@string/rate_button" />
+
+        <Button
+            android:id="@+id/trendButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/colorSecondaryVariant"
+            android:drawableStart="@drawable/trend"
+            android:text="@string/trend_button" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

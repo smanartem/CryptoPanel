@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/colorSecondaryVariant">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -19,8 +21,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:textSize="50sp"
+        android:layout_marginTop="16dp"
+        android:text="ID"
+        android:textSize="40sp"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
@@ -29,34 +32,85 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="128dp"
-        android:textSize="50sp"
+        android:layout_marginTop="32dp"
+        android:text="price"
+        android:textSize="40sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/rank" />
 
     <TextView
         android:id="@+id/dayChanges"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:textSize="32sp"
+        android:text="dayChange"
+        android:textSize="30sp"
         app:layout_constraintStart_toEndOf="@+id/price"
         app:layout_constraintTop_toTopOf="@+id/price" />
 
-    <com.robinhood.spark.SparkView
-        android:id="@+id/sparkView"
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/price">
+        app:layout_constraintTop_toBottomOf="@+id/high_24">
 
-    </com.robinhood.spark.SparkView>
+    </com.github.mikephil.charting.charts.LineChart>
 
+    <TextView
+        android:id="@+id/rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        android:text="rank"
+        app:layout_constraintStart_toStartOf="@+id/idCoin"
+        app:layout_constraintTop_toBottomOf="@+id/idCoin" />
 
+    <TextView
+        android:id="@+id/marketCap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="20sp"
+        android:text="marketCap"
+        app:layout_constraintStart_toStartOf="@+id/price"
+        app:layout_constraintTop_toBottomOf="@+id/price" />
+
+    <TextView
+        android:id="@+id/circulation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="20sp"
+        android:text="Circullation Supply"
+        app:layout_constraintStart_toStartOf="@+id/marketCap"
+        app:layout_constraintTop_toBottomOf="@+id/marketCap" />
+
+    <TextView
+        android:id="@+id/low_24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textSize="20sp"
+        android:text="low_24"
+        app:layout_constraintStart_toStartOf="@+id/circulation"
+        app:layout_constraintTop_toBottomOf="@+id/circulation" />
+
+    <TextView
+        android:id="@+id/high_24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:textSize="20sp"
+        android:text="high_24"
+        app:layout_constraintStart_toEndOf="@+id/low_24"
+        app:layout_constraintTop_toTopOf="@+id/low_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>
