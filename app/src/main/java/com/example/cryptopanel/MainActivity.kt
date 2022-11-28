@@ -3,7 +3,6 @@ package com.example.cryptopanel
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -16,6 +15,8 @@ import com.example.cryptopanel.menu.createSwitchItem
 import com.example.cryptopanel.viewModels.CryptoPanelViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
+
+const val MODE = "mode"
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: CryptoPanelViewModel by viewModels()

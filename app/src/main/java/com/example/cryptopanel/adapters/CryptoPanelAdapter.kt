@@ -17,21 +17,9 @@ import kotlinx.android.synthetic.main.item_currency.view.*
 class CryptoPanelAdapter : RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>() {
 
     private val differ = AsyncListDiffer(this, MyDiffUtil())
-    lateinit var topList : MutableSet<String>
+    lateinit var topList: MutableSet<String>
 
     inner class MyViewHolder(binding: ItemCurrencyBinding) : RecyclerView.ViewHolder(binding.root)
-
-    fun setCoinsList(newCoins: List<Coin>) {
-        differ.submitList(newCoins)
-    }
-
-    fun setListTop(set: MutableSet<String>) {
-        topList = set
-    }
-
-    fun getListTop(): MutableSet<String> {
-        return topList
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding =
@@ -79,6 +67,18 @@ class CryptoPanelAdapter : RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>
     }
 
     override fun getItemCount(): Int = differ.currentList.size
+
+    fun setCoinsList(newCoins: List<Coin>) {
+        differ.submitList(newCoins)
+    }
+
+    fun setListTop(set: MutableSet<String>) {
+        topList = set
+    }
+
+    fun getListTop(): MutableSet<String> {
+        return topList
+    }
 }
 
 fun checkOnClickListener(check: CheckedTextView, topList: MutableSet<String>, id: String) {

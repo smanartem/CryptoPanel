@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/item"
     android:layout_width="match_parent"
-    android:layout_height="64dp">
+    android:layout_height="48sp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="48sp"
         android:orientation="horizontal">
 
         <CheckedTextView
@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:gravity="center"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -33,10 +33,10 @@
 
         <TextView
             android:id="@+id/nameCoin"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,16 +46,16 @@
             <TextView
                 android:id="@+id/priceCoin"
                 android:layout_width="match_parent"
-                android:layout_height="32dp"
+                android:layout_height="24sp"
                 android:gravity="end"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/dayChange"
                 android:layout_width="match_parent"
-                android:layout_height="32dp"
+                android:layout_height="24sp"
                 android:gravity="end"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

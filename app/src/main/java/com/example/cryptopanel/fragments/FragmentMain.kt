@@ -17,6 +17,8 @@ import com.example.cryptopanel.viewModels.CryptoPanelViewModel
 import com.example.cryptopanel.viewModels.getTopCoinsString
 import kotlinx.android.synthetic.main.fragment_main.*
 
+const val TOPLIST = "topList"
+
 class FragmentMain : Fragment(R.layout.fragment_main) {
     private val adapter = CryptoPanelAdapter()
     private val viewModel: CryptoPanelViewModel by activityViewModels()
@@ -32,7 +34,10 @@ class FragmentMain : Fragment(R.layout.fragment_main) {
         }
         viewModel.getAllCoins()
         updateUI()
+        setListeners()
+    }
 
+    private fun setListeners() {
         var topStatus = false
         var trendStatus = false
 
@@ -67,8 +72,7 @@ class FragmentMain : Fragment(R.layout.fragment_main) {
 
     private fun updateUI() {
         binding.apply {
-            val topList = prefs.getStringSet("topList", mutableSetOf())
-            topList?.let { adapter.setListTop(it) }
+            loadPrefs()
 
             rvCoins.layoutManager = LinearLayoutManager(context)
             rvCoins.adapter = adapter
@@ -84,8 +88,18 @@ class FragmentMain : Fragment(R.layout.fragment_main) {
 
 
     override fun onPause() {
-        prefs.edit().putStringSet("topList", adapter.getListTop()).apply()
+        savePrefs()
         super.onPause()
+    }
+
+    private fun savePrefs() {
+        prefs.edit().remove(TOPLIST).apply()
+        prefs.edit().putStringSet(TOPLIST, adapter.getListTop()).apply()
+    }
+
+    private fun loadPrefs() {
+        val topList = prefs.getStringSet(TOPLIST, mutableSetOf())
+        adapter.setListTop(topList!!)
     }
 
     private fun tapedColor(): Int {
@@ -100,5 +114,7 @@ class FragmentMain : Fragment(R.layout.fragment_main) {
         button.setBackgroundColor(if (checked) untappedColor() else tapedColor())
     }
 }
+
+
 
 
