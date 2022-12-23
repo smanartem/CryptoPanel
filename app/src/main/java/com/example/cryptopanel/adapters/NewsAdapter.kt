@@ -12,10 +12,12 @@ import com.example.cryptopanel.model.NewsResponse
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_article.view.*
 
+//ListAdapter
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.MyViewHolder>() {
 
     private var news = listOf<Article>()
 
+    //то же что и в CryptoPanelAdapter
     inner class MyViewHolder(binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -33,6 +35,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.MyViewHolder>() {
 
                 Picasso.get()
                     .load(urlToImage)
+                        //мэджык намберс
                     .resize(100, 100)
                     .into(ivArticleImage)
             }
@@ -47,6 +50,9 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.MyViewHolder>() {
 
     fun setNews(breakingNews: NewsResponse) {
         this.news = breakingNews.articles
+        //будет каждый раз проходится по всему списку, лучше использовать более специфические методы типа
+        //notifyItemChanged(position = Id) notifyItemRemoved(position = Id) и тд, а лучше заюзать ListAdapter
+        //который будет делать всё это за тебя
         notifyDataSetChanged()
     }
 }

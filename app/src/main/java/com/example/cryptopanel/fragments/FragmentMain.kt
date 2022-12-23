@@ -17,11 +17,13 @@ import com.example.cryptopanel.viewModels.CryptoPanelViewModel
 import com.example.cryptopanel.viewModels.getTopCoinsString
 import kotlinx.android.synthetic.main.fragment_main.*
 
+// private "TOP_LIST"
 const val TOPLIST = "topList"
 
 class FragmentMain : Fragment(R.layout.fragment_main) {
     private val adapter = CryptoPanelAdapter()
     private val viewModel: CryptoPanelViewModel by activityViewModels()
+    //lateinit var только в тестах или инжекте (если по какой-то причине нелзя заинжектить через констуктор)
     private lateinit var binding: FragmentMainBinding
     private val prefs by lazy { requireActivity().getPreferences(MODE_PRIVATE) }
 

@@ -14,6 +14,7 @@ import com.example.cryptopanel.viewModels.NewsViewModel
 class FragmentNews : Fragment(R.layout.fragment_news) {
     private val adapter = NewsAdapter()
     private val viewModel: NewsViewModel by activityViewModels()
+    //lateinit var только в тестах или инжекте (если по какой-то причине нелзя заинжектить через констуктор)
     private lateinit var binding: FragmentNewsBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

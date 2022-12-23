@@ -18,12 +18,14 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_coin_details.*
 
 class FragmentCoinDetails : Fragment(R.layout.fragment_coin_details) {
+    //lateinit var только в тестах или инжекте (если по какой-то причине нелзя заинжектить через констуктор)
     private lateinit var binding: FragmentCoinDetailsBinding
     private val viewModel: CryptoPanelViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCoinDetailsBinding.bind(view)
+        //захардкоженное ID
         val position = arguments?.getInt("id")!!
 
         viewModel.coinsList.observe(viewLifecycleOwner) {
@@ -45,6 +47,7 @@ class FragmentCoinDetails : Fragment(R.layout.fragment_coin_details) {
 
             val yData = ArrayList<Entry>()
             val arrayListOfDouble = coin.sparkline_in_7d.price
+            //мэджик намберс
             for(index in arrayListOfDouble.indices){
                 if(index % 24 == 0)
                 yData.add(Entry(index.toFloat(), arrayListOfDouble[index].toFloat()))
@@ -65,6 +68,7 @@ class FragmentCoinDetails : Fragment(R.layout.fragment_coin_details) {
             set.mode = LineDataSet.Mode.HORIZONTAL_BEZIER
             set.setDrawFilled(true)
 
+            //в ресурсы
             set.label = "last 7 days"
 
             val dataSet = ArrayList<ILineDataSet>()
@@ -72,6 +76,7 @@ class FragmentCoinDetails : Fragment(R.layout.fragment_coin_details) {
 
             chart.data = LineData(dataSet)
 
+            //мэджик намберс
             Picasso.get()
                 .load(coin.image)
                 .resize(200, 200)

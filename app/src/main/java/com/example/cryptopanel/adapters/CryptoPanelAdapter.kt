@@ -14,11 +14,13 @@ import com.example.cryptopanel.model.Coin
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_currency.view.*
 
+//Почитай про ListAdapter
 class CryptoPanelAdapter : RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>() {
 
     private val differ = AsyncListDiffer(this, MyDiffUtil())
     lateinit var topList: MutableSet<String>
 
+    //отдельный файл
     inner class MyViewHolder(binding: ItemCurrencyBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -28,6 +30,8 @@ class CryptoPanelAdapter : RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        //эту логику лучше делать в самописном методе вьюхолдера bind() а туту просто дёргать его,
+        //это делается чтобы onBindViewHolder не выростал до милиарда строк при нескольких итемах
         with(holder.itemView) {
             with(differ.currentList[position]) {
                 number.text = buildString {

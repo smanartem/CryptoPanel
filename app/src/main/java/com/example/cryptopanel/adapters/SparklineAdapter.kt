@@ -2,7 +2,7 @@ package com.example.cryptopanel.adapters
 
 import com.robinhood.spark.SparkAdapter
 
-
+//незаюзаный класс
 class SparklineAdapter(private val yData: ArrayList<Double>) : SparkAdapter() {
 
     override fun getCount(): Int {

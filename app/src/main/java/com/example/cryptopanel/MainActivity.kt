@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+            // = Unit смотрится лучше
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
 
             override fun onTabReselected(tab: TabLayout.Tab?) {}

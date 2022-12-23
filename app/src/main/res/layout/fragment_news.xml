@@ -25,6 +25,7 @@
         app:layout_constraintTop_toBottomOf="@+id/searchNews"
         android:background="@color/white"/>
 
+<!--    размеры в ресурсы-->
     <ProgressBar
         android:id="@+id/progressBar2"
         android:layout_width="64dp"

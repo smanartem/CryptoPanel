@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--вот тут хватит одного ConstraintLayout-->
+<!--   размеры в ресурсы -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/item"
     android:layout_width="match_parent"
     android:layout_height="48sp">
 
+    <!--   textSize в ресурсы -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48sp"
         android:orientation="horizontal">
 
+        <!--   размеры в ресурсы -->
         <CheckedTextView
             android:id="@+id/check"
             android:layout_width="24dp"
             android:layout_height="match_parent"
             android:gravity="center" />
 
+        <!--    margin-ги в ресурсы-->
+        <!--   размеры в ресурсы -->
+        <!--   textSize в ресурсы -->
         <TextView
             android:id="@+id/number"
             android:layout_width="32dp"
@@ -24,6 +31,8 @@
             android:gravity="center"
             android:textSize="12sp" />
 
+        <!--   размеры в ресурсы -->
+        <!--    margin-ги в ресурсы-->
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="34dp"
@@ -31,6 +40,7 @@
             android:layout_marginEnd="12dp"
             app:srcCompat="@drawable/placeholder" />
 
+        <!--   textSize в ресурсы-->
         <TextView
             android:id="@+id/nameCoin"
             android:layout_width="wrap_content"
@@ -42,7 +52,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
+            <!--   textSize в ресурсы-->
+            <!--   размеры в ресурсы (тут они почему-то в sp)-->
             <TextView
                 android:id="@+id/priceCoin"
                 android:layout_width="match_parent"
@@ -50,6 +61,8 @@
                 android:gravity="end"
                 android:textSize="18sp" />
 
+            <!--   textSize в ресурсы-->
+            <!--   размеры в ресурсы (тут они почему-то в sp)-->
             <TextView
                 android:id="@+id/dayChange"
                 android:layout_width="match_parent"

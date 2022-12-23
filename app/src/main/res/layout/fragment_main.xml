@@ -16,6 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/trend_buttons_layout" />
 
+    <!--    размеры в ресурсы, в случае с прогрес баром их можно вообще не указывать если дефолтный тебя устраевает
+    "wrap_content"-->
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="64dp"
@@ -25,6 +27,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--    тут не нужен LinearLayout ты же юзаешь ConstraintLayout,
+        просто привязываешь StartToStart parent и endToStart следующая кнопка
+        и наоборот
+    -->
     <LinearLayout
         android:id="@+id/trend_buttons_layout"
         android:layout_width="0dp"

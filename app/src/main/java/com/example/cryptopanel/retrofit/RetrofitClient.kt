@@ -3,7 +3,7 @@ package com.example.cryptopanel.retrofit
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
+//вместо этого DI
 object RetrofitClient {
     lateinit var coinGeckoApi: CoinGeckoApi
 

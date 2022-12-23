@@ -7,6 +7,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+//API ключи лучше хранить BuildConfig хотябы
 private const val API_NEWS_KEY = "b99dbbe56f204d26a827539f431417a2"
 
 interface CoinGeckoApi {

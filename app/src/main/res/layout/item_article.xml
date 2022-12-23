@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- В итемах для ресайклера лучше использовать ConstraintLayout только при большом кол-ве View (условно больше 6-ти)
+ тут можно обойтись двумя вложенными линерами, так будет производительней-->
+
+<!--    padding-ги в ресурсы-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,6 +12,7 @@
     android:visibility="visible"
     tools:visibility="visible">
 
+    <!--    размеры в ресурсы-->
     <ImageView
         android:id="@+id/ivArticleImage"
         android:layout_width="160dp"
@@ -16,6 +21,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--    текст в ресурсы-->
+    <!--    margin-ги в ресурсы-->
     <TextView
         android:id="@+id/tvSource"
         android:layout_width="wrap_content"
@@ -26,6 +33,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivArticleImage" />
 
+    <!--    текст в ресурсы-->
+    <!--    margin-ги в ресурсы-->
+    <!--   textSize в ресурсы-->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
@@ -41,6 +51,9 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--    текст в ресурсы-->
+    <!--    margin-ги в ресурсы-->
+    <!--    padding-ги в ресурсы-->
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="0dp"
@@ -55,6 +68,8 @@
         app:layout_constraintStart_toEndOf="@+id/ivArticleImage"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
+    <!--    текст в ресурсы-->
+    <!--    margin-ги в ресурсы-->
     <TextView
         android:id="@+id/tvPublishedAt"
         android:layout_width="wrap_content"
