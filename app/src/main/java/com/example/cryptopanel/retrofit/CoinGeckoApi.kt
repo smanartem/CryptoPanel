@@ -22,8 +22,6 @@ interface CoinGeckoApi {
         ids: String
     ): Response<List<Coin>>
 
-
-
     @GET("http://newsapi.org/v2/everything?sortBy=popularity")
     suspend fun getNews(
         @Query("q")

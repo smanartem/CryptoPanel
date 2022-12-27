@@ -18,4 +18,5 @@
     <string name="rank">Rank: %1$d</string>
     <string name="rate_button">top rated</string>
     <string name="trend_button">trending</string>
+    <string name="sparkline_label">last 7 days</string>
 </resources>

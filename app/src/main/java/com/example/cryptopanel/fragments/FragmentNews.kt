@@ -7,24 +7,23 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptopanel.R
-import com.example.cryptopanel.adapters.NewsAdapter
+import com.example.cryptopanel.adapters.NewsListAdapter
 import com.example.cryptopanel.databinding.FragmentNewsBinding
 import com.example.cryptopanel.viewModels.NewsViewModel
 
 class FragmentNews : Fragment(R.layout.fragment_news) {
-    private val adapter = NewsAdapter()
+    private val adapter = NewsListAdapter()
     private val viewModel: NewsViewModel by activityViewModels()
-    private lateinit var binding: FragmentNewsBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentNewsBinding.bind(view)
+        val binding = FragmentNewsBinding.bind(view)
 
         viewModel.news.observe(viewLifecycleOwner) {
-            adapter.setNews(it).also { binding.progressBar2.visibility = View.INVISIBLE }
+            adapter.submitList(it).also { binding.progressBar2.visibility = View.INVISIBLE }
         }
         viewModel.getAllNews()
-        updateUI()
+        updateUI(binding)
 
         binding.searchNews.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -40,7 +39,7 @@ class FragmentNews : Fragment(R.layout.fragment_news) {
         })
     }
 
-    private fun updateUI() {
+    private fun updateUI(binding: FragmentNewsBinding) {
         binding.apply {
             rvNews.layoutManager = LinearLayoutManager(context)
             rvNews.adapter = adapter

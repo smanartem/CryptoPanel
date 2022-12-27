@@ -1,7 +1,5 @@
 package com.example.cryptopanel.model
 
-import java.io.Serializable
-
 // POJO
 
 data class Coin(
@@ -34,6 +32,6 @@ data class Coin(
     val percentage: Double,
     val last_updated: String,
     val sparkline_in_7d: Price,
-) : Serializable
+)
 
 

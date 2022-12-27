@@ -1,7 +1,5 @@
 package com.example.cryptopanel.model
 
-import java.io.Serializable
-
 data class Article(
     var id: Int? = null,
     val author: String,
@@ -12,4 +10,4 @@ data class Article(
     val title: String,
     val url: String,
     val urlToImage: String
-): Serializable
+)

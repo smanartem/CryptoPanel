@@ -1,3 +1,3 @@
 package com.example.cryptopanel.model
 
-class Trend(val coins: List<TrendCoin>)
+data class Trend(val coins: List<TrendCoin>)

@@ -11,33 +11,31 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptopanel.R
-import com.example.cryptopanel.adapters.CryptoPanelAdapter
+import com.example.cryptopanel.adapters.CryptoPanelListAdapter
 import com.example.cryptopanel.databinding.FragmentMainBinding
 import com.example.cryptopanel.viewModels.CryptoPanelViewModel
-import com.example.cryptopanel.viewModels.getTopCoinsString
 import kotlinx.android.synthetic.main.fragment_main.*
 
-const val TOPLIST = "topList"
+private const val TOPLIST = "topList"
 
 class FragmentMain : Fragment(R.layout.fragment_main) {
-    private val adapter = CryptoPanelAdapter()
+    private val adapter = CryptoPanelListAdapter()
     private val viewModel: CryptoPanelViewModel by activityViewModels()
-    private lateinit var binding: FragmentMainBinding
     private val prefs by lazy { requireActivity().getPreferences(MODE_PRIVATE) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentMainBinding.bind(view)
+        val binding = FragmentMainBinding.bind(view)
 
         viewModel.coinsList.observe(viewLifecycleOwner) {
-            adapter.setCoinsList(it).also { binding.progressBar.visibility = View.INVISIBLE }
+            adapter.submitList(it).also { binding.progressBar.visibility = View.INVISIBLE }
         }
         viewModel.getAllCoins()
-        updateUI()
-        setListeners()
+        updateUI(binding)
+        setListeners(binding)
     }
 
-    private fun setListeners() {
+    private fun setListeners(binding: FragmentMainBinding) {
         var topStatus = false
         var trendStatus = false
 
@@ -64,13 +62,13 @@ class FragmentMain : Fragment(R.layout.fragment_main) {
                 trendStatus = false
                 setTappedColor(trendButton, true)
                 val topArray = adapter.getListTop().toList()
-                viewModel.getTop(getTopCoinsString(topArray))
+                viewModel.getTop(topArray)
             }
         }
     }
 
 
-    private fun updateUI() {
+    private fun updateUI(binding: FragmentMainBinding) {
         binding.apply {
             loadPrefs()
 

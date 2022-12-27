@@ -1,8 +1,6 @@
 package com.example.cryptopanel.model
 
-import java.io.Serializable
-
-class Item(
+data class Item(
     val id: String,
     val coin_id: Int,
     val name: String,
@@ -14,4 +12,4 @@ class Item(
     val slug: String,
     val price_btc: Double,
     val score: Int
-) : Serializable
+)

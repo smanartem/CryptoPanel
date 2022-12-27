@@ -7,12 +7,10 @@ import com.example.cryptopanel.R
 import com.example.cryptopanel.databinding.FragmentNewsDetailsBinding
 
 class FragmentNewsDetails: Fragment(R.layout.fragment_news_details) {
-    private lateinit var binding: FragmentNewsDetailsBinding
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentNewsDetailsBinding.bind(view)
+        val binding = FragmentNewsDetailsBinding.bind(view)
 
         val url = arguments?.getString("url").toString()
         binding.webView.loadUrl(url)
