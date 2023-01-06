@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_start">16dp</dimen>
+    <dimen name="news_margin_start">8dp</dimen>
+    <dimen name="margin_top">24dp</dimen>
+    <dimen name="margin_end">12dp</dimen>
+    <dimen name="news_margin_top">16dp</dimen>
+    <dimen name="main_text_size">40sp</dimen>
+    <dimen name="secondary_text_size">20sp</dimen>
+    <dimen name="news_image_width">160dp</dimen>
+    <dimen name="news_image_height">90sp</dimen>
+    <dimen name="item_currency_height">48sp</dimen>
+    <dimen name="check_star_width">24dp</dimen>
+    <dimen name="item_views_width">34dp</dimen>
+    <dimen name="item_number_size">12sp</dimen>
+    <dimen name="item_price_size">18sp</dimen>
+    <dimen name="item_dayChange_size">16sp</dimen>
+    <dimen name="item_linear_height">24sp</dimen>
+</resources>

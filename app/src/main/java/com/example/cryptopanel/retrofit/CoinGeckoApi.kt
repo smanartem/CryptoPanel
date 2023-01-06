@@ -1,5 +1,6 @@
 package com.example.cryptopanel.retrofit
 
+import com.example.cryptopanel.BuildConfig
 import com.example.cryptopanel.model.Coin
 import com.example.cryptopanel.model.NewsResponse
 import com.example.cryptopanel.model.Trend
@@ -7,7 +8,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-private const val API_NEWS_KEY = "b99dbbe56f204d26a827539f431417a2"
+private const val KEY = BuildConfig.API_KEY
 
 interface CoinGeckoApi {
     @GET("http://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&sparkline=true")
@@ -22,13 +23,11 @@ interface CoinGeckoApi {
         ids: String
     ): Response<List<Coin>>
 
-
-
     @GET("http://newsapi.org/v2/everything?sortBy=popularity")
     suspend fun getNews(
         @Query("q")
         searchQuery: String = "Crypto",
         @Query("apiKey")
-        apiKey: String = API_NEWS_KEY
+        apiKey: String = KEY
     ): Response<NewsResponse>
 }

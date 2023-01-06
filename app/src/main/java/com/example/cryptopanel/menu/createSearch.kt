@@ -3,7 +3,7 @@ package com.example.cryptopanel.menu
 import android.view.Menu
 import androidx.appcompat.widget.SearchView
 import com.example.cryptopanel.R
-import com.example.cryptopanel.sortByName
+import com.example.cryptopanel.model.Coin
 import com.example.cryptopanel.viewModels.CryptoPanelViewModel
 
 fun createSearchView(menu: Menu, viewModel: CryptoPanelViewModel){
@@ -13,7 +13,7 @@ fun createSearchView(menu: Menu, viewModel: CryptoPanelViewModel){
     searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {
             if (query!!.isNotEmpty()) {
-                val sortedArray = sortByName(viewModel.coinsList.value!!, query)
+                val sortedArray = sortByName(viewModel._coinsList.value!!, query)
                 viewModel.setSortArray(sortedArray)
             }
             return true
@@ -24,4 +24,14 @@ fun createSearchView(menu: Menu, viewModel: CryptoPanelViewModel){
             return true
         }
     })
+}
+
+private fun sortByName(items: List<Coin>, chars: String): List<Coin> {
+    val tempArray = mutableListOf<Coin>()
+    items.forEach {
+        if (it.name.lowercase().contains(chars.lowercase())) {
+            tempArray.add(it)
+        }
+    }
+    return tempArray
 }

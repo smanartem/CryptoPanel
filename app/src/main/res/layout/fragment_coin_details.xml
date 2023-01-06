@@ -10,8 +10,8 @@
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="@dimen/margin_start"
+        android:layout_marginTop="@dimen/margin_top"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_foreground" />
@@ -20,10 +20,9 @@
         android:id="@+id/idCoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="ID"
-        android:textSize="40sp"
+        android:layout_marginStart="@dimen/margin_start"
+        android:layout_marginTop="@dimen/margin_top"
+        android:textSize="@dimen/main_text_size"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
@@ -31,10 +30,9 @@
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="price"
-        android:textSize="40sp"
+        android:layout_marginStart="@dimen/margin_start"
+        android:layout_marginTop="@dimen/margin_top"
+        android:textSize="@dimen/main_text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rank" />
 
@@ -42,9 +40,8 @@
         android:id="@+id/dayChanges"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="dayChange"
-        android:textSize="30sp"
+        android:layout_marginStart="@dimen/margin_start"
+        android:textSize="@dimen/main_text_size"
         app:layout_constraintStart_toEndOf="@+id/price"
         app:layout_constraintTop_toTopOf="@+id/price" />
 
@@ -53,8 +50,8 @@
         android:id="@+id/chart"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="@dimen/margin_start"
+        android:layout_marginTop="@dimen/margin_top"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -68,9 +65,8 @@
         android:id="@+id/rank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textSize="20sp"
-        android:text="rank"
+        android:layout_marginTop="@dimen/margin_top"
+        android:textSize="@dimen/secondary_text_size"
         app:layout_constraintStart_toStartOf="@+id/idCoin"
         app:layout_constraintTop_toBottomOf="@+id/idCoin" />
 
@@ -78,9 +74,8 @@
         android:id="@+id/marketCap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="20sp"
-        android:text="marketCap"
+        android:layout_marginTop="@dimen/margin_top"
+        android:textSize="@dimen/secondary_text_size"
         app:layout_constraintStart_toStartOf="@+id/price"
         app:layout_constraintTop_toBottomOf="@+id/price" />
 
@@ -88,9 +83,8 @@
         android:id="@+id/circulation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="20sp"
-        android:text="Circullation Supply"
+        android:layout_marginTop="@dimen/margin_top"
+        android:textSize="@dimen/secondary_text_size"
         app:layout_constraintStart_toStartOf="@+id/marketCap"
         app:layout_constraintTop_toBottomOf="@+id/marketCap" />
 
@@ -98,9 +92,8 @@
         android:id="@+id/low_24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:textSize="20sp"
-        android:text="low_24"
+        android:layout_marginTop="@dimen/margin_top"
+        android:textSize="@dimen/secondary_text_size"
         app:layout_constraintStart_toStartOf="@+id/circulation"
         app:layout_constraintTop_toBottomOf="@+id/circulation" />
 
@@ -108,9 +101,8 @@
         android:id="@+id/high_24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:textSize="20sp"
-        android:text="high_24"
+        android:layout_marginStart="@dimen/margin_start"
+        android:textSize="@dimen/secondary_text_size"
         app:layout_constraintStart_toEndOf="@+id/low_24"
         app:layout_constraintTop_toTopOf="@+id/low_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>

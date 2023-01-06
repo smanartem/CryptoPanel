@@ -5,21 +5,58 @@ import android.view.ViewGroup
 import android.widget.CheckedTextView
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cryptopanel.MyDiffUtil
 import com.example.cryptopanel.R
 import com.example.cryptopanel.databinding.ItemCurrencyBinding
+import com.example.cryptopanel.fragments.toFormat
 import com.example.cryptopanel.model.Coin
+import com.example.cryptopanel.utils.setColor
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_currency.view.*
+const val ID = "id"
+const val NAME = "name"
 
-class CryptoPanelAdapter : RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>() {
+class CryptoPanelListAdapter :
+    ListAdapter<Coin, CryptoPanelListAdapter.MyViewHolder>(CoinDiffUtil()) {
 
-    private val differ = AsyncListDiffer(this, MyDiffUtil())
     lateinit var topList: MutableSet<String>
 
-    inner class MyViewHolder(binding: ItemCurrencyBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class MyViewHolder(binding: ItemCurrencyBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bindTo(coin: Coin, position: Int) {
+            with(itemView) {
+                number.text = "#${position + 1}"
+                dayChange.text = buildString {
+                    append("%.2f")
+                }.format(coin.price_change_percentage_24h)
+                dayChange.setTextColor(setColor(coin.price_change_percentage_24h))
+                nameCoin.text = coin.name
+                priceCoin.text = coin.current_price.toFormat()
+
+                Picasso.get()
+                    .load(coin.image)
+                    .resize(100, 100)
+                    .into(imageView)
+
+                setOnClickListener { view ->
+                    view.findNavController().navigate(
+                        R.id.action_fragmentMain_to_fragmentCoinDetails,
+                        bundleOf(ID to position, NAME to coin.name)
+                    )
+                }
+
+                if (topList.contains(coin.id)) {
+                    checkIsTrue(check)
+                } else {
+                    checkIsFalse(check)
+                }
+
+                check.setOnClickListener {
+                    checkOnClickListener(it.check, topList, coin.id)
+                }
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding =
@@ -28,48 +65,7 @@ class CryptoPanelAdapter : RecyclerView.Adapter<CryptoPanelAdapter.MyViewHolder>
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        with(holder.itemView) {
-            with(differ.currentList[position]) {
-                number.text = buildString {
-                    append("#")
-                    append(position + 1)
-                }
-                dayChange.text = buildString {
-                    append("%.2f")
-                }.format(this.price_change_percentage_24h)
-                dayChange.setTextColor(setColor(this.price_change_percentage_24h))
-                nameCoin.text = this.name
-                priceCoin.text = doubleToString(this.current_price)
-
-                setOnClickListener { view ->
-                    view.findNavController().navigate(
-                        R.id.action_fragmentMain_to_fragmentCoinDetails,
-                        bundleOf("id" to position, "name" to this.name)
-                    )
-                }
-
-                if (topList.contains(this.id)) {
-                    checkIsTrue(check)
-                } else {
-                    checkIsFalse(check)
-                }
-
-                check.setOnClickListener {
-                    checkOnClickListener(it.check, topList, this.id)
-                }
-
-                Picasso.get()
-                    .load(this.image)
-                    .resize(100, 100)
-                    .into(imageView)
-            }
-        }
-    }
-
-    override fun getItemCount(): Int = differ.currentList.size
-
-    fun setCoinsList(newCoins: List<Coin>) {
-        differ.submitList(newCoins)
+        holder.bindTo(getItem(position), position)
     }
 
     fun setListTop(set: MutableSet<String>) {
