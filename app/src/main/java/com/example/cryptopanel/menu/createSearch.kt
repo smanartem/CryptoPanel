@@ -13,7 +13,7 @@ fun createSearchView(menu: Menu, viewModel: CryptoPanelViewModel){
     searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {
             if (query!!.isNotEmpty()) {
-                val sortedArray = sortByName(viewModel.coinsList.value!!, query)
+                val sortedArray = sortByName(viewModel._coinsList.value!!, query)
                 viewModel.setSortArray(sortedArray)
             }
             return true

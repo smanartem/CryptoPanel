@@ -9,13 +9,16 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
+
     defaultConfig {
         applicationId "com.example.cryptopanel"
         minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
+        buildConfigField 'String', 'API_KEY', '"b99dbbe56f204d26a827539f431417a2"'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -24,6 +27,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_KEY", "b99dbbe56f204d26a827539f431417a2"
         }
     }
     compileOptions {

@@ -2,6 +2,7 @@ package com.example.cryptopanel.viewModels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.cryptopanel.model.Article
@@ -10,7 +11,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class NewsViewModel(app: Application) : AndroidViewModel(app) {
-    val news = MutableLiveData<List<Article>>()
+    private val news = MutableLiveData<List<Article>>()
+    val _news: LiveData<List<Article>> = news
 
     fun getAllNews() = viewModelScope.launch {
         news.postValue(getDataNews())

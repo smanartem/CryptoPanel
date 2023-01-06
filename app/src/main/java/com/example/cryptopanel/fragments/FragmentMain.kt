@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,28 +18,27 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 private const val TOPLIST = "topList"
 
-class FragmentMain : Fragment(R.layout.fragment_main) {
+class FragmentMain : BindingFragment<FragmentMainBinding>(FragmentMainBinding::class) {
     private val adapter = CryptoPanelListAdapter()
     private val viewModel: CryptoPanelViewModel by activityViewModels()
     private val prefs by lazy { requireActivity().getPreferences(MODE_PRIVATE) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentMainBinding.bind(view)
 
-        viewModel.coinsList.observe(viewLifecycleOwner) {
+        viewModel._coinsList.observe(viewLifecycleOwner) {
             adapter.submitList(it).also { binding.progressBar.visibility = View.INVISIBLE }
         }
         viewModel.getAllCoins()
-        updateUI(binding)
-        setListeners(binding)
+        updateUI()
+        setListeners()
     }
 
-    private fun setListeners(binding: FragmentMainBinding) {
+    private fun setListeners() {
         var topStatus = false
         var trendStatus = false
 
-        binding.trendButton.setOnClickListener {
+        trendButton.setOnClickListener {
             setTappedColor(trendButton, trendStatus)
             if (trendStatus) {
                 trendStatus = false
@@ -52,7 +51,7 @@ class FragmentMain : Fragment(R.layout.fragment_main) {
             }
         }
 
-        binding.topRateButton.setOnClickListener {
+        topRateButton.setOnClickListener {
             setTappedColor(topRateButton, topStatus)
             if (topStatus) {
                 topStatus = false
@@ -68,20 +67,18 @@ class FragmentMain : Fragment(R.layout.fragment_main) {
     }
 
 
-    private fun updateUI(binding: FragmentMainBinding) {
-        binding.apply {
+    private fun updateUI() {
             loadPrefs()
 
-            rvCoins.layoutManager = LinearLayoutManager(context)
-            rvCoins.adapter = adapter
-            rvCoins.setHasFixedSize(true)
+            rv_coins.layoutManager = LinearLayoutManager(context)
+            rv_coins.adapter = adapter
+            rv_coins.setHasFixedSize(true)
 
             val mDecoration = DividerItemDecoration(context, VERTICAL)
             ContextCompat.getDrawable(requireContext(), R.drawable.divider_drawable)
                 ?.let { mDecoration.setDrawable(it) }
-            rvCoins.addItemDecoration(mDecoration)
+            rv_coins.addItemDecoration(mDecoration)
             progressBar.visibility = View.VISIBLE
-        }
     }
 
 

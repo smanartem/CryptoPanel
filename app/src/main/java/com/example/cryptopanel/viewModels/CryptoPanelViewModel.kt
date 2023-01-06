@@ -2,6 +2,7 @@ package com.example.cryptopanel.viewModels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.cryptopanel.model.Coin
@@ -14,7 +15,8 @@ import kotlinx.coroutines.launch
 private val retrofit = RetrofitClient.coinGeckoApi
 
 class CryptoPanelViewModel(app: Application) : AndroidViewModel(app) {
-    val coinsList = MutableLiveData<List<Coin>>()
+    private val coinsList = MutableLiveData<List<Coin>>()
+    val _coinsList: LiveData<List<Coin>> = coinsList
 
     fun getAllCoins() {
         if (coinsList.value.isNullOrEmpty()) {
