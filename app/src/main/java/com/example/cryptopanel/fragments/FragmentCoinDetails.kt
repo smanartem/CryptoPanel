@@ -2,14 +2,12 @@ package com.example.cryptopanel.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.example.cryptopanel.R
 import com.example.cryptopanel.adapters.ID
-import com.example.cryptopanel.utils.setColor
 import com.example.cryptopanel.databinding.FragmentCoinDetailsBinding
 import com.example.cryptopanel.model.Coin
+import com.example.cryptopanel.utils.setColor
 import com.example.cryptopanel.viewModels.CryptoPanelViewModel
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -36,7 +34,6 @@ class FragmentCoinDetails :
     }
 
     private fun updateUI(coin: Coin) {
-
         idCoin.text = coin.id
         price.text = coin.current_price.toString()
         dayChanges.text = coin.price_change_24h.toFormat()
@@ -79,6 +76,5 @@ class FragmentCoinDetails :
             .load(coin.image)
             .resize(200, 200)
             .into(imageView2)
-
     }
 }

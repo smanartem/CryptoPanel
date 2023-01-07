@@ -27,7 +27,7 @@ class FragmentMain : BindingFragment<FragmentMainBinding>(FragmentMainBinding::c
         super.onViewCreated(view, savedInstanceState)
 
         viewModel._coinsList.observe(viewLifecycleOwner) {
-            adapter.submitList(it).also { binding.progressBar.visibility = View.INVISIBLE }
+            adapter.submitList(it).also { progressBar.visibility = View.INVISIBLE }
         }
         viewModel.getAllCoins()
         updateUI()
@@ -68,19 +68,18 @@ class FragmentMain : BindingFragment<FragmentMainBinding>(FragmentMainBinding::c
 
 
     private fun updateUI() {
-            loadPrefs()
+        loadPrefs()
 
-            rv_coins.layoutManager = LinearLayoutManager(context)
-            rv_coins.adapter = adapter
-            rv_coins.setHasFixedSize(true)
+        rv_coins.layoutManager = LinearLayoutManager(context)
+        rv_coins.adapter = adapter
+        rv_coins.setHasFixedSize(true)
 
-            val mDecoration = DividerItemDecoration(context, VERTICAL)
-            ContextCompat.getDrawable(requireContext(), R.drawable.divider_drawable)
-                ?.let { mDecoration.setDrawable(it) }
-            rv_coins.addItemDecoration(mDecoration)
-            progressBar.visibility = View.VISIBLE
+        val mDecoration = DividerItemDecoration(context, VERTICAL)
+        ContextCompat.getDrawable(requireContext(), R.drawable.divider_drawable)
+            ?.let { mDecoration.setDrawable(it) }
+        rv_coins.addItemDecoration(mDecoration)
+        progressBar.visibility = View.VISIBLE
     }
-
 
     override fun onPause() {
         savePrefs()

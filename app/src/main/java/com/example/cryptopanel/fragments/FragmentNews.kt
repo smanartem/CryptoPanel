@@ -18,14 +18,14 @@ class FragmentNews : BindingFragment<FragmentNewsBinding>(FragmentNewsBinding::c
         super.onViewCreated(view, savedInstanceState)
 
         viewModel._news.observe(viewLifecycleOwner) {
-            adapter.submitList(it).also { binding.progressBar2.visibility = View.INVISIBLE }
+            adapter.submitList(it).also { progressBar2.visibility = View.INVISIBLE }
         }
         viewModel.getAllNews()
         updateUI()
 
-        searchNews.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        searchNews.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if(query!!.isNotEmpty()){
+                if (query!!.isNotEmpty()) {
                     viewModel.getSearchNews(query)
                 }
                 return true
@@ -38,12 +38,10 @@ class FragmentNews : BindingFragment<FragmentNewsBinding>(FragmentNewsBinding::c
     }
 
     private fun updateUI() {
-        binding.apply {
-            rvNews.layoutManager = LinearLayoutManager(context)
-            rvNews.adapter = adapter
-            rvNews.setHasFixedSize(true)
-            progressBar2.visibility = View.VISIBLE
-        }
+        rv_news.layoutManager = LinearLayoutManager(context)
+        rv_news.adapter = adapter
+        rv_news.setHasFixedSize(true)
+        progressBar2.visibility = View.VISIBLE
     }
 }
 
