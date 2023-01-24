@@ -5,6 +5,7 @@ import androidx.appcompat.widget.SearchView
 import com.example.cryptopanel.R
 import com.example.cryptopanel.model.Coin
 import com.example.cryptopanel.viewModels.CryptoPanelViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 fun createSearchView(menu: Menu, viewModel: CryptoPanelViewModel){
     val searchItem = menu.findItem(R.id.action_search)
