@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,12 +13,13 @@ import com.example.cryptopanel.adapters.CryptoPanelListAdapter
 import com.example.cryptopanel.databinding.FragmentMainBinding
 import com.example.cryptopanel.viewModels.CryptoPanelViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 private const val TOPLIST = "topList"
 
 class FragmentMain : BindingFragment<FragmentMainBinding>(FragmentMainBinding::class) {
     private val adapter = CryptoPanelListAdapter()
-    private val viewModel: CryptoPanelViewModel by activityViewModels()
+    private val viewModel: CryptoPanelViewModel by activityViewModel()
     private val prefs by lazy { requireActivity().getPreferences(MODE_PRIVATE) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

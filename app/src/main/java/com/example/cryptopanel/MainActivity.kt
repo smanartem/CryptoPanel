@@ -3,7 +3,6 @@ package com.example.cryptopanel
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -15,17 +14,19 @@ import com.example.cryptopanel.menu.createSwitchItem
 import com.example.cryptopanel.viewModels.CryptoPanelViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 const val MODE = "mode"
 
 class MainActivity : AppCompatActivity() {
-    private val viewModel: CryptoPanelViewModel by viewModels()
+    private val viewModel: CryptoPanelViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-    lateinit var preferences: SharedPreferences
+    private lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)

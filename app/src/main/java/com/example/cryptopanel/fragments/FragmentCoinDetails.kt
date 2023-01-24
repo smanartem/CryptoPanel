@@ -2,7 +2,6 @@ package com.example.cryptopanel.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
 import com.example.cryptopanel.R
 import com.example.cryptopanel.adapters.ID
 import com.example.cryptopanel.databinding.FragmentCoinDetailsBinding
@@ -15,6 +14,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_coin_details.*
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 fun Double.toFormat() = if (this < 1) "%.6f".format(this) else "%.2f".format(this)
 
@@ -22,7 +22,7 @@ const val HOURS_DAY = 24
 
 class FragmentCoinDetails :
     BindingFragment<FragmentCoinDetailsBinding>(FragmentCoinDetailsBinding::class) {
-    private val viewModel: CryptoPanelViewModel by activityViewModels()
+    private val viewModel: CryptoPanelViewModel by activityViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,6 +34,7 @@ class FragmentCoinDetails :
     }
 
     private fun updateUI(coin: Coin) {
+
         idCoin.text = coin.id
         price.text = coin.current_price.toString()
         dayChanges.text = coin.price_change_24h.toFormat()
@@ -76,5 +77,6 @@ class FragmentCoinDetails :
             .load(coin.image)
             .resize(200, 200)
             .into(imageView2)
+
     }
 }
