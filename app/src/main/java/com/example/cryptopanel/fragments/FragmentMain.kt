@@ -1,6 +1,6 @@
 package com.example.cryptopanel.fragments
 
-import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -13,14 +13,16 @@ import com.example.cryptopanel.adapters.CryptoPanelListAdapter
 import com.example.cryptopanel.databinding.FragmentMainBinding
 import com.example.cryptopanel.viewModels.CryptoPanelViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
+import org.koin.core.qualifier.named
 
-private const val TOPLIST = "topList"
+const val TOPLIST = "topList"
 
 class FragmentMain : BindingFragment<FragmentMainBinding>(FragmentMainBinding::class) {
     private val adapter = CryptoPanelListAdapter()
     private val viewModel: CryptoPanelViewModel by activityViewModel()
-    private val prefs by lazy { requireActivity().getPreferences(MODE_PRIVATE) }
+    private val prefs: SharedPreferences by inject(named("topListPrefs"))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,17 +69,17 @@ class FragmentMain : BindingFragment<FragmentMainBinding>(FragmentMainBinding::c
 
 
     private fun updateUI() {
-            loadPrefs()
+        loadPrefs()
 
-            rv_coins.layoutManager = LinearLayoutManager(context)
-            rv_coins.adapter = adapter
-            rv_coins.setHasFixedSize(true)
+        rv_coins.layoutManager = LinearLayoutManager(context)
+        rv_coins.adapter = adapter
+        rv_coins.setHasFixedSize(true)
 
-            val mDecoration = DividerItemDecoration(context, VERTICAL)
-            ContextCompat.getDrawable(requireContext(), R.drawable.divider_drawable)
-                ?.let { mDecoration.setDrawable(it) }
-            rv_coins.addItemDecoration(mDecoration)
-            progressBar.visibility = View.VISIBLE
+        val mDecoration = DividerItemDecoration(context, VERTICAL)
+        ContextCompat.getDrawable(requireContext(), R.drawable.divider_drawable)
+            ?.let { mDecoration.setDrawable(it) }
+        rv_coins.addItemDecoration(mDecoration)
+        progressBar.visibility = View.VISIBLE
     }
 
 

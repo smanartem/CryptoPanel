@@ -14,15 +14,18 @@ import com.example.cryptopanel.menu.createSwitchItem
 import com.example.cryptopanel.viewModels.CryptoPanelViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.qualifier.named
 
 const val MODE = "mode"
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: CryptoPanelViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
-    private lateinit var preferences: SharedPreferences
+    private val navController: NavController by lazy { createNavHost().navController }
+    private val preferences: SharedPreferences by inject(named("modePrefs"))
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         setUpUI()
-        preferences = getPreferences(MODE_PRIVATE)
     }
 
     private fun setUpUI() {
@@ -48,11 +50,11 @@ class MainActivity : AppCompatActivity() {
 
             override fun onTabReselected(tab: TabLayout.Tab?) = Unit
         })
-
-        val navHost =
-            supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
-        navController = navHost.navController
         NavigationUI.setupActionBarWithNavController(this, navController)
+    }
+
+    private fun createNavHost(): NavHostFragment {
+        return supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

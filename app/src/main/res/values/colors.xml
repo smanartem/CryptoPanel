@@ -11,7 +11,9 @@
     <color name="green">#76ff03</color>
     <color name="pureBlue">#232F34</color>
     <color name="greenDark">#7ecb20</color>
+    <color name="greenLite">#b2ff59</color>
     <color name="whiteShade">#F6F7EB</color>
     <color name="button_taped">#F6F7EB</color>
     <color name="button_untapped">#FFFFFFFF</color>
+    <color name="details_color">#1bc3b9</color>
 </resources>
