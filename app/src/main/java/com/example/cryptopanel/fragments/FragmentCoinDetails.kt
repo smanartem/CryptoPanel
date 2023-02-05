@@ -2,6 +2,7 @@ package com.example.cryptopanel.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.example.cryptopanel.R
 import com.example.cryptopanel.adapters.ID
 import com.example.cryptopanel.databinding.FragmentCoinDetailsBinding
@@ -19,6 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.activityViewModel
 fun Double.toFormat() = if (this < 1) "%.6f".format(this) else "%.2f".format(this)
 
 const val HOURS_DAY = 24
+const val AXIS_TEXT_SIZE = 15f
 
 class FragmentCoinDetails :
     BindingFragment<FragmentCoinDetailsBinding>(FragmentCoinDetailsBinding::class) {
@@ -34,8 +36,6 @@ class FragmentCoinDetails :
     }
 
     private fun updateUI(coin: Coin) {
-
-        idCoin.text = coin.id
         price.text = coin.current_price.toString()
         dayChanges.text = coin.price_change_24h.toFormat()
         dayChanges.setTextColor(setColor(coin.price_change_24h))
@@ -45,38 +45,59 @@ class FragmentCoinDetails :
         low_24.text = getString(R.string.low_24, coin.low_24h.toInt())
         high_24.text = getString(R.string.high_24, coin.high_24h.toInt())
 
-        val yData = ArrayList<Entry>()
-        val arrayListOfDouble = coin.sparkline_in_7d.price
-        for (index in arrayListOfDouble.indices) {
-            if (index % HOURS_DAY == 0)
-                yData.add(Entry(index.toFloat(), arrayListOfDouble[index].toFloat()))
-        }
+        setupLineChart(coin.sparkline_in_7d.price)
 
-        val set = LineDataSet(yData, "1")
-
-        set.setDrawCircles(false)
-        chart.description.text = ""
-        chart.xAxis.setDrawAxisLine(false)
-
-        set.setDrawIcons(false)
-        set.setDrawHorizontalHighlightIndicator(false)
-        set.setDrawVerticalHighlightIndicator(false)
-        set.setDrawValues(false)
-
-        set.mode = LineDataSet.Mode.HORIZONTAL_BEZIER
-        set.setDrawFilled(true)
-
-        set.label = R.string.sparkline_label.toString()
-
-        val dataSet = ArrayList<ILineDataSet>()
-        dataSet.add(set)
-
-        chart.data = LineData(dataSet)
 
         Picasso.get()
             .load(coin.image)
             .resize(200, 200)
             .into(imageView2)
+    }
 
+    private fun setupLineChart(data: ArrayList<Double>): Unit {
+        val yData = ArrayList<Entry>()
+
+        for (index in data.indices) {
+            if (index % HOURS_DAY == 0)
+                yData.add(Entry(index.toFloat(), data[index].toFloat()))
+        }
+
+        val set = LineDataSet(yData, "")
+
+        with(chart) {
+            setDrawGridBackground(false)
+            description = null
+            legend.isEnabled = false
+
+            xAxis.apply {
+                setDrawAxisLine(false)
+                setDrawLabels(false)
+                setDrawGridLines(false)
+            }
+
+            axisLeft.apply {
+                setDrawGridLines(true)
+                setDrawLabels(true)
+                textColor = ContextCompat.getColor(requireContext(), R.color.greenLite)
+                textSize = AXIS_TEXT_SIZE
+            }
+
+            axisRight.apply {
+                isEnabled = false
+            }
+        }
+
+        with(set) {
+            setDrawCircles(false)
+            setDrawValues(false)
+            mode = LineDataSet.Mode.CUBIC_BEZIER
+            setDrawFilled(true)
+            color = ContextCompat.getColor(requireContext(), R.color.green)
+            fillDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.bg_spark_line)
+        }
+
+        val dataSet = ArrayList<ILineDataSet>()
+        dataSet.add(set)
+        chart.data = LineData(dataSet)
     }
 }

@@ -6,4 +6,9 @@
     <style name="recycler_style">
         <item name="android:background">@color/blue</item>
     </style>
+    <style name="details_textView_style">
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@drawable/bg_details_textview</item>
+    </style>
 </resources>

@@ -2,4 +2,5 @@
 <resources>
     <color name="button_taped">#232F34</color>
     <color name="button_untapped">#344955</color>
+    <color name="details_color">#b44e8f</color>
 </resources>

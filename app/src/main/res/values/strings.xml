@@ -11,7 +11,7 @@
     <string name="switch_no">light</string>
     <string name="switch_text">light mode</string>
     <string name="star_switcher">star_switcher</string>
-    <string name="market_cap">Market Cap: %1$d</string>
+    <string name="market_cap">Market Cap: %1$d $</string>
     <string name="total_supply">Total supply: %1$d</string>
     <string name="low_24">Low 24h: %1$d</string>
     <string name="high_24">High 24h: %1$d</string>

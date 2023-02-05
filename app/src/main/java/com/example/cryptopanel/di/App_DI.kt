@@ -11,4 +11,4 @@ val viewModelModule = module {
     viewModel { NewsViewModel(get()) }
 }
 
-val appModule = viewModelModule + networkModule
+val appModule = viewModelModule + networkModule + prefsModule
