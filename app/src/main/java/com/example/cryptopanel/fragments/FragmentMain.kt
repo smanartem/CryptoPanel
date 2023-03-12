@@ -5,11 +5,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptopanel.R
 import com.example.cryptopanel.adapters.CryptoPanelListAdapter
+import com.example.cryptopanel.adapters.ID
+import com.example.cryptopanel.adapters.NAME
 import com.example.cryptopanel.databinding.FragmentMainBinding
 import com.example.cryptopanel.viewModels.CryptoPanelViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -20,7 +24,12 @@ import org.koin.core.qualifier.named
 const val TOPLIST = "topList"
 
 class FragmentMain : BindingFragment<FragmentMainBinding>(FragmentMainBinding::class) {
-    private val adapter = CryptoPanelListAdapter()
+    private val adapter = CryptoPanelListAdapter() { Int, String ->
+        findNavController().navigate(
+            R.id.action_fragmentMain_to_fragmentCoinDetails,
+            bundleOf(ID to Int, NAME to String)
+        )
+    }
     private val viewModel: CryptoPanelViewModel by activityViewModel()
     private val prefs: SharedPreferences by inject(named("topListPrefs"))
 

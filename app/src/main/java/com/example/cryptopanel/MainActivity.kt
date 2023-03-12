@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.cryptopanel.databinding.ActivityMainBinding
@@ -39,11 +38,7 @@ class MainActivity : AppCompatActivity() {
     private fun setUpUI() {
         tabLayout?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                if (tab?.position == 0) {
-                    findNavController(fragment_container_view.id).navigate(R.id.fragmentMain)
-                } else {
-                    findNavController(fragment_container_view.id).navigate(R.id.fragmentNews)
-                }
+                navController.navigate(if (tab?.position == 0) R.id.fragmentMain else R.id.fragmentNews)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) = Unit
