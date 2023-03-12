@@ -1,28 +1,38 @@
 package com.example.cryptopanel.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckedTextView
-import androidx.core.os.bundleOf
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptopanel.R
-import com.example.cryptopanel.databinding.ItemCurrencyBinding
 import com.example.cryptopanel.fragments.toFormat
 import com.example.cryptopanel.model.Coin
 import com.example.cryptopanel.utils.setColor
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_currency.view.*
+
 const val ID = "id"
 const val NAME = "name"
 
-class CryptoPanelListAdapter :
-    ListAdapter<Coin, CryptoPanelListAdapter.MyViewHolder>(CoinDiffUtil()) {
+class CryptoPanelListAdapter(private val onClickListener: (Int, String) -> Unit) :
+    ListAdapter<Coin, CryptoPanelListAdapter.CoinViewHolder>(CoinDiffUtil()) {
 
     lateinit var topList: MutableSet<String>
 
-    inner class MyViewHolder(binding: ItemCurrencyBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class CoinViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+        init{
+            itemView.setOnClickListener{
+                onClickListener(absoluteAdapterPosition, getItem(absoluteAdapterPosition).name)
+            }
+
+            itemView.check.setOnClickListener{
+                checkOnClickListener(it.check, topList, getItem(absoluteAdapterPosition).id)
+            }
+        }
+
         fun bindTo(coin: Coin, position: Int) {
             with(itemView) {
                 number.text = "#${position + 1}"
@@ -38,33 +48,22 @@ class CryptoPanelListAdapter :
                     .resize(100, 100)
                     .into(imageView)
 
-                setOnClickListener { view ->
-                    view.findNavController().navigate(
-                        R.id.action_fragmentMain_to_fragmentCoinDetails,
-                        bundleOf(ID to position, NAME to coin.name)
-                    )
-                }
-
                 if (topList.contains(coin.id)) {
                     checkIsTrue(check)
                 } else {
                     checkIsFalse(check)
                 }
-
-                check.setOnClickListener {
-                    checkOnClickListener(it.check, topList, coin.id)
-                }
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding =
-            ItemCurrencyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinViewHolder {
+        val viewHolder =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_currency, parent, false)
+        return CoinViewHolder(viewHolder)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CoinViewHolder, position: Int) {
         holder.bindTo(getItem(position), position)
     }
 
