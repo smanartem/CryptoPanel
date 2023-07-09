@@ -1,6 +1,5 @@
 package com.example.cryptopanel.adapters
 
-import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +12,6 @@ import com.example.cryptopanel.model.Coin
 import com.example.cryptopanel.utils.setColor
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_currency.view.*
-import org.koin.android.ext.android.inject
-import org.koin.core.qualifier.named
-import org.koin.java.KoinJavaComponent.inject
 
 const val ID = "id"
 const val NAME = "name"
@@ -39,7 +35,7 @@ class CryptoPanelListAdapter(private val onClickListener: (Int, String) -> Unit)
 
         fun bindTo(coin: Coin, position: Int) {
             with(itemView) {
-                number.text = "#${position + 1}"
+                number.text = coin.market_cap_rank.toInt().toString()
                 dayChange.text = buildString {
                     append("%.2f")
                 }.format(coin.price_change_percentage_24h)
