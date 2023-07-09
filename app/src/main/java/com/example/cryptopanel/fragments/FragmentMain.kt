@@ -24,7 +24,7 @@ import org.koin.core.qualifier.named
 const val TOPLIST = "topList"
 
 class FragmentMain : BindingFragment<FragmentMainBinding>(FragmentMainBinding::class) {
-    private val adapter = CryptoPanelListAdapter() { Int, String ->
+    private val adapter = CryptoPanelListAdapter { Int, String ->
         findNavController().navigate(
             R.id.action_fragmentMain_to_fragmentCoinDetails,
             bundleOf(ID to Int, NAME to String)
@@ -36,10 +36,12 @@ class FragmentMain : BindingFragment<FragmentMainBinding>(FragmentMainBinding::c
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel._coinsList.observe(viewLifecycleOwner) {
+        viewModel.loadCoins()
+
+        viewModel.coinsListLive.observe(viewLifecycleOwner) {
             adapter.submitList(it).also { progressBar.visibility = View.INVISIBLE }
         }
-        viewModel.getAllCoins()
+
         updateUI()
         setListeners()
     }
@@ -70,8 +72,7 @@ class FragmentMain : BindingFragment<FragmentMainBinding>(FragmentMainBinding::c
                 topStatus = true
                 trendStatus = false
                 setTappedColor(trendButton, true)
-                val topArray = adapter.getListTop().toList()
-                viewModel.getTop(topArray)
+                viewModel.getTop(getTopArray())
             }
         }
     }
@@ -117,8 +118,12 @@ class FragmentMain : BindingFragment<FragmentMainBinding>(FragmentMainBinding::c
     private fun setTappedColor(button: Button, checked: Boolean) {
         button.setBackgroundColor(if (checked) untappedColor() else tapedColor())
     }
-}
 
+    private fun getTopArray(): List<String> {
+        return adapter.getListTop().toList()
+    }
+
+}
 
 
 

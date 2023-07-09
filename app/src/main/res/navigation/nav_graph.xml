@@ -11,23 +11,11 @@
         android:label="Currency"
         tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_fragmentMain_to_fragmentNews"
-            app:destination="@id/fragmentNews" />
-        <action
             android:id="@+id/action_fragmentMain_to_fragmentCoinDetails"
             app:destination="@id/fragmentCoinDetails" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentNews"
-        android:name="com.example.cryptopanel.fragments.FragmentNews"
-        android:label="CryptoNews"
-        tools:layout="@layout/fragment_news">
         <action
-            android:id="@+id/action_fragmentNews_to_fragmentMain"
-            app:destination="@id/fragmentMain" />
-        <action
-            android:id="@+id/action_fragmentNews_to_fragmentNewsDetails"
-            app:destination="@id/fragmentNewsDetails" />
+            android:id="@+id/action_fragmentMain_to_fragmentTradeHelper"
+            app:destination="@id/fragmentTradeHelper" />
     </fragment>
     <fragment
         android:id="@+id/fragmentCoinDetails"
@@ -39,12 +27,7 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentNewsDetails"
-        android:name="com.example.cryptopanel.fragments.FragmentNewsDetails"
-        android:label="{title}"
-        tools:layout="@layout/fragment_news_details">
-        <argument
-            android:name="title"
-            app:argType="string" />
-    </fragment>
+        android:id="@+id/fragmentTradeHelper"
+        android:name="com.example.cryptopanel.fragments.FragmentTradeHelper"
+        android:label="FragmentTradeHelper" />
 </navigation>

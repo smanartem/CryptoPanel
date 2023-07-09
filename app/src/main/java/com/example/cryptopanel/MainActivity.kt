@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     private fun setUpUI() {
         tabLayout?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                navController.navigate(if (tab?.position == 0) R.id.fragmentMain else R.id.fragmentNews)
+                navController.navigate(if (tab?.position == 0) R.id.fragmentMain else R.id.fragmentTradeHelper)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) = Unit

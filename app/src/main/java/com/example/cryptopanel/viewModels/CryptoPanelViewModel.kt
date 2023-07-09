@@ -7,50 +7,61 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.cryptopanel.model.Coin
 import com.example.cryptopanel.retrofit.CoinGeckoApi
-import com.example.cryptopanel.utils.extractString
-import com.example.cryptopanel.utils.listToString
+import com.example.cryptopanel.utils.extractListOfString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CryptoPanelViewModel(private val coinGeckoApi: CoinGeckoApi, app: Application) : AndroidViewModel(app) {
-    private val coinsList = MutableLiveData<List<Coin>>()
-    val _coinsList: LiveData<List<Coin>> = coinsList
+class CryptoPanelViewModel(private val coinGeckoApi: CoinGeckoApi, app: Application) :
+    AndroidViewModel(app) {
 
+    var listOfCoins: List<Coin> = listOf()
 
-    fun getAllCoins() {
-        if (coinsList.value.isNullOrEmpty()) {
-            viewModelScope.launch(Dispatchers.IO) {
-                coinsList.postValue(getDataCoins())
-            }
+    private val coinsListMutable = MutableLiveData<List<Coin>>()
+    val coinsListLive: LiveData<List<Coin>> = coinsListMutable
+
+    fun loadCoins() {
+        viewModelScope.launch(Dispatchers.IO) {
+            setDataToList(coinGeckoApi.getCoins().body() ?: emptyList())
+            refresh()
         }
+    }
+    private fun setDataToList(data: List<Coin>) {
+        listOfCoins = data
     }
 
     fun setSortArray(item: List<Coin>) {
-        coinsList.value = item
+        coinsListMutable.postValue(item)
     }
 
-    fun refresh() = viewModelScope.launch {
-        coinsList.postValue(getDataCoins())
+    fun refresh() {
+        coinsListMutable.postValue(listOfCoins)
     }
 
     fun getTrend() = viewModelScope.launch {
-        coinsList.postValue(coinGeckoApi.getTrendTopCoins(getTrendingCoinsString()).body())
+        coinsListMutable.postValue(filterIt(getTrendingCoinsString(), listOfCoins))
     }
-
 
     fun getTop(array: List<String>) = viewModelScope.launch {
-        val s = getTopCoinsString(array)
-        coinsList.postValue(coinGeckoApi.getTrendTopCoins(s).body())
+        coinsListMutable.postValue(filterIt(array, listOfCoins))
     }
 
-    private suspend fun getDataCoins() = coinGeckoApi.getCoins().body() ?: emptyList()
-
-
-    private fun getTopCoinsString(array: List<String>): String {
-        return listToString(array)
+    private suspend fun getTrendingCoinsString(): List<String> {
+        return extractListOfString(coinGeckoApi.getTrendCoins().body()?.coins)
     }
 
-    private suspend fun getTrendingCoinsString(): String {
-        return extractString(coinGeckoApi.getTrendCoins().body()?.coins)
+
+    fun getData(): List<Coin> {
+        return listOfCoins
+    }
+
+    fun filterIt(s: List<String>, list: List<Coin>): List<Coin> {
+        val tempArray = mutableListOf<Coin>()
+
+        s.forEach {
+            for (l in list) {
+                if (l.id == it) tempArray.add(l)
+            }
+        }
+        return tempArray
     }
 }

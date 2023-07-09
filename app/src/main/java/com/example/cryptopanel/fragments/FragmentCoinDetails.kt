@@ -30,7 +30,7 @@ class FragmentCoinDetails :
         super.onViewCreated(view, savedInstanceState)
         val position = arguments?.getInt(ID)!!
 
-        viewModel._coinsList.observe(viewLifecycleOwner) {
+        viewModel.coinsListLive.observe(viewLifecycleOwner) {
             updateUI(it[position])
         }
     }
@@ -46,7 +46,6 @@ class FragmentCoinDetails :
         high_24.text = getString(R.string.high_24, coin.high_24h.toInt())
 
         setupLineChart(coin.sparkline_in_7d.price)
-
 
         Picasso.get()
             .load(coin.image)

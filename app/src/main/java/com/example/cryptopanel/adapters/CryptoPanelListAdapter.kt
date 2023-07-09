@@ -1,5 +1,6 @@
 package com.example.cryptopanel.adapters
 
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,9 @@ import com.example.cryptopanel.model.Coin
 import com.example.cryptopanel.utils.setColor
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_currency.view.*
+import org.koin.android.ext.android.inject
+import org.koin.core.qualifier.named
+import org.koin.java.KoinJavaComponent.inject
 
 const val ID = "id"
 const val NAME = "name"
@@ -23,12 +27,12 @@ class CryptoPanelListAdapter(private val onClickListener: (Int, String) -> Unit)
 
     inner class CoinViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        init{
-            itemView.setOnClickListener{
+        init {
+            itemView.setOnClickListener {
                 onClickListener(absoluteAdapterPosition, getItem(absoluteAdapterPosition).name)
             }
 
-            itemView.check.setOnClickListener{
+            itemView.check.setOnClickListener {
                 checkOnClickListener(it.check, topList, getItem(absoluteAdapterPosition).id)
             }
         }
@@ -86,6 +90,7 @@ fun checkOnClickListener(check: CheckedTextView, topList: MutableSet<String>, id
     }
 }
 
+//TODO: funs below replace to class adapter and make them protected or private
 fun checkIsTrue(check: CheckedTextView) {
     check.isChecked = true
     check.setCheckMarkDrawable(R.drawable.star_full)
