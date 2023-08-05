@@ -1,13 +1,15 @@
-package com.example.cryptopanel.fragments
+package com.example.cryptopanel.ui.tradeHelper
 
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.cryptopanel.adapters.TradeHelperAdapter
 import com.example.cryptopanel.databinding.FragmentTradeHelperBinding
+import com.example.cryptopanel.utils.BindingFragment
+import com.example.cryptopanel.ui.mainScreen.TOPLIST
+import com.example.cryptopanel.ui.coinDetails.toFormat
 import com.example.cryptopanel.model.Coin
-import com.example.cryptopanel.viewModels.CryptoPanelViewModel
+import com.example.cryptopanel.ui.mainScreen.CryptoPanelViewModel
 import kotlinx.android.synthetic.main.fragment_trade_helper.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel

@@ -1,14 +1,11 @@
-package com.example.cryptopanel.adapters
+package com.example.cryptopanel.ui.tradeHelper
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptopanel.R
-import com.example.cryptopanel.fragments.FIRST_PRICE
-import com.example.cryptopanel.fragments.START_CURRENCY
-import com.example.cryptopanel.fragments.START_SYMBOL
-import com.example.cryptopanel.fragments.toFormat
+import com.example.cryptopanel.ui.coinDetails.toFormat
 import com.example.cryptopanel.model.Coin
 import kotlinx.android.synthetic.main.item_template.view.*
 

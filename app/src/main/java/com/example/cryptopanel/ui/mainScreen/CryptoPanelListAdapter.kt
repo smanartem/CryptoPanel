@@ -1,4 +1,4 @@
-package com.example.cryptopanel.adapters
+package com.example.cryptopanel.ui.mainScreen
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,9 @@ import android.widget.CheckedTextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptopanel.R
-import com.example.cryptopanel.fragments.toFormat
+import com.example.cryptopanel.ui.coinDetails.toFormat
 import com.example.cryptopanel.model.Coin
+import com.example.cryptopanel.utils.CoinDiffUtil
 import com.example.cryptopanel.utils.setColor
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_currency.view.*

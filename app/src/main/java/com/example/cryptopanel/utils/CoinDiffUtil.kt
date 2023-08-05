@@ -1,4 +1,4 @@
-package com.example.cryptopanel.adapters
+package com.example.cryptopanel.utils
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.cryptopanel.model.Coin

@@ -1,12 +1,12 @@
-package com.example.cryptopanel.viewModels
+package com.example.cryptopanel.ui.mainScreen
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.cryptopanel.data.retrofit.CoinGeckoApi
 import com.example.cryptopanel.model.Coin
-import com.example.cryptopanel.retrofit.CoinGeckoApi
 import com.example.cryptopanel.utils.extractListOfString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class CryptoPanelViewModel(private val coinGeckoApi: CoinGeckoApi, app: Application) :
     AndroidViewModel(app) {
 
-    var listOfCoins: List<Coin> = listOf()
+    private var listOfCoins: List<Coin> = listOf()
 
     private val coinsListMutable = MutableLiveData<List<Coin>>()
     val coinsListLive: LiveData<List<Coin>> = coinsListMutable
@@ -25,6 +25,7 @@ class CryptoPanelViewModel(private val coinGeckoApi: CoinGeckoApi, app: Applicat
             refresh()
         }
     }
+
     private fun setDataToList(data: List<Coin>) {
         listOfCoins = data
     }

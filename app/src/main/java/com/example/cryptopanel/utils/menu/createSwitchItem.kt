@@ -1,4 +1,4 @@
-package com.example.cryptopanel.menu
+package com.example.cryptopanel.utils.menu
 
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences

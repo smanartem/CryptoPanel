@@ -1,4 +1,4 @@
-package com.example.cryptopanel.fragments
+package com.example.cryptopanel.ui.mainScreen
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -11,11 +11,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptopanel.R
-import com.example.cryptopanel.adapters.CryptoPanelListAdapter
-import com.example.cryptopanel.adapters.ID
-import com.example.cryptopanel.adapters.NAME
 import com.example.cryptopanel.databinding.FragmentMainBinding
-import com.example.cryptopanel.viewModels.CryptoPanelViewModel
+import com.example.cryptopanel.utils.BindingFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
