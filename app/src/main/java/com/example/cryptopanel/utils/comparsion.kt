@@ -1,4 +1,4 @@
-package com.example.cryptopanel
+package com.example.cryptopanel.utils
 
 import com.example.cryptopanel.model.Coin
 

@@ -1,4 +1,4 @@
-package com.example.cryptopanel.retrofit
+package com.example.cryptopanel.data.retrofit
 
 import com.example.cryptopanel.model.Coin
 import com.example.cryptopanel.model.Trend

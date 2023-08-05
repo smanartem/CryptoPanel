@@ -8,9 +8,9 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.cryptopanel.databinding.ActivityMainBinding
-import com.example.cryptopanel.menu.createSearchView
-import com.example.cryptopanel.menu.createSwitchItem
-import com.example.cryptopanel.viewModels.CryptoPanelViewModel
+import com.example.cryptopanel.utils.menu.createSearchView
+import com.example.cryptopanel.utils.menu.createSwitchItem
+import com.example.cryptopanel.ui.mainScreen.CryptoPanelViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject

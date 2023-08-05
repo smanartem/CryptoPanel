@@ -1,6 +1,6 @@
 package com.example.cryptopanel.di
 
-import com.example.cryptopanel.retrofit.CoinGeckoApi
+import com.example.cryptopanel.data.retrofit.CoinGeckoApi
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

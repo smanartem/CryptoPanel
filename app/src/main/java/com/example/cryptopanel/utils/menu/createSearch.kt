@@ -1,10 +1,10 @@
-package com.example.cryptopanel.menu
+package com.example.cryptopanel.utils.menu
 
 import android.view.Menu
 import androidx.appcompat.widget.SearchView
 import com.example.cryptopanel.R
 import com.example.cryptopanel.model.Coin
-import com.example.cryptopanel.viewModels.CryptoPanelViewModel
+import com.example.cryptopanel.ui.mainScreen.CryptoPanelViewModel
 
 fun createSearchView(menu: Menu, viewModel: CryptoPanelViewModel){
     val searchItem = menu.findItem(R.id.action_search)

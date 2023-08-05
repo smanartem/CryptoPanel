@@ -1,4 +1,4 @@
-package com.example.cryptopanel.fragments
+package com.example.cryptopanel.utils
 
 import android.os.Bundle
 import android.view.LayoutInflater

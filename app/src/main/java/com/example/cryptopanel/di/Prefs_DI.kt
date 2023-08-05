@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import com.example.cryptopanel.MODE
-import com.example.cryptopanel.fragments.TOPLIST
+import com.example.cryptopanel.ui.mainScreen.TOPLIST
 import org.koin.android.ext.koin.androidApplication
 import org.koin.core.qualifier.named
 import org.koin.dsl.module

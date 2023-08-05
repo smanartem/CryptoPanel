@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/item"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_currency_height">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/item_currency_height"
-        android:orientation="horizontal">
-
         <CheckedTextView
             android:id="@+id/check"
             android:layout_width="@dimen/check_star_width"
             android:layout_height="match_parent"
-            android:gravity="center" />
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
             android:id="@+id/number"
@@ -22,26 +18,30 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="@dimen/margin_end"
             android:gravity="center"
-            android:textSize="@dimen/item_number_size" />
+            android:textSize="@dimen/item_number_size"
+            app:layout_constraintStart_toEndOf="@id/check"/>
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="@dimen/item_views_width"
             android:layout_height="match_parent"
             android:layout_marginEnd="@dimen/margin_end"
-            app:srcCompat="@drawable/placeholder" />
+            app:srcCompat="@drawable/placeholder"
+            app:layout_constraintStart_toEndOf="@id/number"/>
 
         <TextView
             android:id="@+id/nameCoin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textSize="@dimen/secondary_text_size" />
+            android:textSize="@dimen/secondary_text_size"
+            app:layout_constraintStart_toEndOf="@id/imageView"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintStart_toEndOf="@id/nameCoin">
 
             <TextView
                 android:id="@+id/priceCoin"
@@ -57,5 +57,5 @@
                 android:gravity="end"
                 android:textSize="@dimen/item_dayChange_size" />
         </LinearLayout>
-    </LinearLayout>
-</RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

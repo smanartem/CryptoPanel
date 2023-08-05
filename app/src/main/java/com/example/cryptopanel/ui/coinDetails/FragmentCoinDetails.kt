@@ -1,14 +1,15 @@
-package com.example.cryptopanel.fragments
+package com.example.cryptopanel.ui.coinDetails
 
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.example.cryptopanel.R
-import com.example.cryptopanel.adapters.ID
+import com.example.cryptopanel.ui.mainScreen.ID
 import com.example.cryptopanel.databinding.FragmentCoinDetailsBinding
+import com.example.cryptopanel.utils.BindingFragment
 import com.example.cryptopanel.model.Coin
 import com.example.cryptopanel.utils.setColor
-import com.example.cryptopanel.viewModels.CryptoPanelViewModel
+import com.example.cryptopanel.ui.mainScreen.CryptoPanelViewModel
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
