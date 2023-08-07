@@ -7,12 +7,17 @@ import android.widget.CheckedTextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptopanel.R
-import com.example.cryptopanel.ui.coinDetails.toFormat
 import com.example.cryptopanel.model.Coin
+import com.example.cryptopanel.ui.coinDetails.toFormat
 import com.example.cryptopanel.utils.CoinDiffUtil
 import com.example.cryptopanel.utils.setColor
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_currency.view.*
+import kotlinx.android.synthetic.main.item_currency.view.check
+import kotlinx.android.synthetic.main.item_currency.view.dayChange
+import kotlinx.android.synthetic.main.item_currency.view.imageView
+import kotlinx.android.synthetic.main.item_currency.view.nameCoin
+import kotlinx.android.synthetic.main.item_currency.view.number
+import kotlinx.android.synthetic.main.item_currency.view.priceCoin
 
 const val ID = "id"
 const val NAME = "name"
