@@ -17,6 +17,7 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.qualifier.named
 
+//some comment here. delete it
 const val MODE = "mode"
 
 class MainActivity : AppCompatActivity() {
