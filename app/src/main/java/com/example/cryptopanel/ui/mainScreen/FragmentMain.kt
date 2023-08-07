@@ -2,25 +2,34 @@ package com.example.cryptopanel.ui.mainScreen
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptopanel.R
 import com.example.cryptopanel.databinding.FragmentMainBinding
-import com.example.cryptopanel.utils.BindingFragment
-import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_main.progressBar
+import kotlinx.android.synthetic.main.fragment_main.rv_coins
+import kotlinx.android.synthetic.main.fragment_main.topRateButton
+import kotlinx.android.synthetic.main.fragment_main.trendButton
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.core.qualifier.named
 
 const val TOPLIST = "topList"
 
-class FragmentMain : BindingFragment<FragmentMainBinding>(FragmentMainBinding::class) {
+class FragmentMain : Fragment() {
+
+    private var _binding: FragmentMainBinding? = null
+    private val binding get() = requireNotNull(_binding)
+
     private val adapter = CryptoPanelListAdapter { Int, String ->
         findNavController().navigate(
             R.id.action_fragmentMain_to_fragmentCoinDetails,
@@ -29,6 +38,15 @@ class FragmentMain : BindingFragment<FragmentMainBinding>(FragmentMainBinding::c
     }
     private val viewModel: CryptoPanelViewModel by activityViewModel()
     private val prefs: SharedPreferences by inject(named("topListPrefs"))
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

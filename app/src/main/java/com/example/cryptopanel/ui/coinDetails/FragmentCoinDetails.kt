@@ -1,21 +1,31 @@
 package com.example.cryptopanel.ui.coinDetails
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.example.cryptopanel.R
-import com.example.cryptopanel.ui.mainScreen.ID
 import com.example.cryptopanel.databinding.FragmentCoinDetailsBinding
-import com.example.cryptopanel.utils.BindingFragment
 import com.example.cryptopanel.model.Coin
-import com.example.cryptopanel.utils.setColor
 import com.example.cryptopanel.ui.mainScreen.CryptoPanelViewModel
+import com.example.cryptopanel.ui.mainScreen.ID
+import com.example.cryptopanel.utils.setColor
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_coin_details.*
+import kotlinx.android.synthetic.main.fragment_coin_details.chart
+import kotlinx.android.synthetic.main.fragment_coin_details.circulation
+import kotlinx.android.synthetic.main.fragment_coin_details.dayChanges
+import kotlinx.android.synthetic.main.fragment_coin_details.high_24
+import kotlinx.android.synthetic.main.fragment_coin_details.imageView2
+import kotlinx.android.synthetic.main.fragment_coin_details.low_24
+import kotlinx.android.synthetic.main.fragment_coin_details.marketCap
+import kotlinx.android.synthetic.main.fragment_coin_details.price
+import kotlinx.android.synthetic.main.fragment_coin_details.rank
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 fun Double.toFormat() = if (this < 1) "%.6f".format(this) else "%.2f".format(this)
@@ -23,9 +33,20 @@ fun Double.toFormat() = if (this < 1) "%.6f".format(this) else "%.2f".format(thi
 const val HOURS_DAY = 24
 const val AXIS_TEXT_SIZE = 15f
 
-class FragmentCoinDetails :
-    BindingFragment<FragmentCoinDetailsBinding>(FragmentCoinDetailsBinding::class) {
+class FragmentCoinDetails : Fragment() {
+
+    private lateinit var binding: FragmentCoinDetailsBinding
+
     private val viewModel: CryptoPanelViewModel by activityViewModel()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentCoinDetailsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
