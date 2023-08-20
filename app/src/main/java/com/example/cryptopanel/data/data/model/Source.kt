@@ -1,4 +1,4 @@
-package com.example.cryptopanel.model
+package com.example.cryptopanel.data.data.model
 
 data class Source(
     val id: Any,

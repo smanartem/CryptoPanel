@@ -7,11 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cryptopanel.data.data.model.CoinDataModel
 import com.example.cryptopanel.databinding.FragmentTradeHelperBinding
-import com.example.cryptopanel.model.Coin
-import com.example.cryptopanel.ui.coinDetails.toFormat
+import com.example.cryptopanel.domain.mapToListUiModels
 import com.example.cryptopanel.ui.mainScreen.CryptoPanelViewModel
 import com.example.cryptopanel.ui.mainScreen.TOPLIST
+import com.example.cryptopanel.utils.toFormat
 import kotlinx.android.synthetic.main.fragment_trade_helper.compare_rw
 import kotlinx.android.synthetic.main.fragment_trade_helper.convert_btn
 import kotlinx.android.synthetic.main.fragment_trade_helper.editTextNumber
@@ -53,12 +54,12 @@ class FragmentTradeHelper : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val data: List<Coin> = viewModel.getData()
+        val data: List<CoinDataModel> = viewModel.getData()
 
         val filteredData = viewModel.filterIt(
             prefs.getStringSet(TOPLIST, mutableSetOf())?.toList()!!,
             data
-        )
+        ).mapToListUiModels()
 
 
         compare_rw.layoutManager = LinearLayoutManager(context)

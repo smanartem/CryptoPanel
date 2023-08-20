@@ -1,6 +1,6 @@
 package com.example.cryptopanel.utils
 
-import com.example.cryptopanel.model.TrendCoin
+import com.example.cryptopanel.data.data.model.TrendCoin
 
 fun extractListOfString(array: List<TrendCoin>?): List<String> {
     return if (array != null) {

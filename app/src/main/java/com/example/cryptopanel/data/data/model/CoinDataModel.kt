@@ -1,8 +1,8 @@
-package com.example.cryptopanel.model
+package com.example.cryptopanel.data.data.model
 
 // POJO
 
-data class Coin(
+data class CoinDataModel(
     val id: String,
     val symbol: String,
     val name: String,

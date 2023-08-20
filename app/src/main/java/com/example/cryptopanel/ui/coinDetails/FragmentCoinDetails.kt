@@ -8,10 +8,12 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.cryptopanel.R
 import com.example.cryptopanel.databinding.FragmentCoinDetailsBinding
-import com.example.cryptopanel.model.Coin
+import com.example.cryptopanel.domain.mapToListUiModels
 import com.example.cryptopanel.ui.mainScreen.CryptoPanelViewModel
 import com.example.cryptopanel.ui.mainScreen.ID
+import com.example.cryptopanel.ui.model.CoinUiModel
 import com.example.cryptopanel.utils.setColor
+import com.example.cryptopanel.utils.toFormat
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -27,8 +29,6 @@ import kotlinx.android.synthetic.main.fragment_coin_details.marketCap
 import kotlinx.android.synthetic.main.fragment_coin_details.price
 import kotlinx.android.synthetic.main.fragment_coin_details.rank
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
-
-fun Double.toFormat() = if (this < 1) "%.6f".format(this) else "%.2f".format(this)
 
 const val HOURS_DAY = 24
 const val AXIS_TEXT_SIZE = 15f
@@ -53,24 +53,24 @@ class FragmentCoinDetails : Fragment() {
         val position = arguments?.getInt(ID)!!
 
         viewModel.coinsListLive.observe(viewLifecycleOwner) {
-            updateUI(it[position])
+            updateUI(it.mapToListUiModels()[position])
         }
     }
 
-    private fun updateUI(coin: Coin) {
-        price.text = coin.current_price.toString()
-        dayChanges.text = coin.price_change_24h.toFormat()
-        dayChanges.setTextColor(setColor(coin.price_change_24h))
-        rank.text = getString(R.string.rank, coin.market_cap_rank.toInt())
-        marketCap.text = getString(R.string.market_cap, coin.market_cap.toInt())
-        circulation.text = getString(R.string.total_supply, coin.total_supply.toInt())
-        low_24.text = getString(R.string.low_24, coin.low_24h.toInt())
-        high_24.text = getString(R.string.high_24, coin.high_24h.toInt())
+    private fun updateUI(coinUiModel: CoinUiModel) {
+        price.text = coinUiModel.price.toString()
+        dayChanges.text = coinUiModel.dayChange.toFormat()
+        dayChanges.setTextColor(setColor(coinUiModel.dayChange))
+        rank.text = getString(R.string.rank, coinUiModel.marketCapRank.toInt())
+        marketCap.text = getString(R.string.market_cap, coinUiModel.marketCap.toInt())
+        circulation.text = getString(R.string.total_supply, coinUiModel.totalSupply.toInt())
+        low_24.text = getString(R.string.low_24, coinUiModel.low24h.toInt())
+        high_24.text = getString(R.string.high_24, coinUiModel.high24h.toInt())
 
-        setupLineChart(coin.sparkline_in_7d.price)
+        setupLineChart(coinUiModel.sparkline)
 
         Picasso.get()
-            .load(coin.image)
+            .load(coinUiModel.imageUrl)
             .resize(200, 200)
             .into(imageView2)
     }
