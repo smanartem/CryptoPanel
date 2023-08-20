@@ -7,10 +7,10 @@ import android.widget.CheckedTextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptopanel.R
-import com.example.cryptopanel.model.Coin
-import com.example.cryptopanel.ui.coinDetails.toFormat
+import com.example.cryptopanel.ui.model.CoinUiModel
 import com.example.cryptopanel.utils.CoinDiffUtil
 import com.example.cryptopanel.utils.setColor
+import com.example.cryptopanel.utils.toFormat
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_currency.view.check
 import kotlinx.android.synthetic.main.item_currency.view.dayChange
@@ -23,7 +23,7 @@ const val ID = "id"
 const val NAME = "name"
 
 class CryptoPanelListAdapter(private val onClickListener: (Int, String) -> Unit) :
-    ListAdapter<Coin, CryptoPanelListAdapter.CoinViewHolder>(CoinDiffUtil()) {
+    ListAdapter<CoinUiModel, CryptoPanelListAdapter.CoinViewHolder>(CoinDiffUtil()) {
 
     lateinit var topList: MutableSet<String>
 
@@ -39,22 +39,22 @@ class CryptoPanelListAdapter(private val onClickListener: (Int, String) -> Unit)
             }
         }
 
-        fun bindTo(coin: Coin, position: Int) {
+        fun bindTo(coinUiModel: CoinUiModel) {
             with(itemView) {
-                number.text = coin.market_cap_rank.toInt().toString()
+                number.text = coinUiModel.marketCapRank.toInt().toString()
                 dayChange.text = buildString {
                     append("%.2f")
-                }.format(coin.price_change_percentage_24h)
-                dayChange.setTextColor(setColor(coin.price_change_percentage_24h))
-                nameCoin.text = coin.name
-                priceCoin.text = coin.current_price.toFormat()
+                }.format(coinUiModel.dayChange)
+                dayChange.setTextColor(setColor(coinUiModel.dayChange))
+                nameCoin.text = coinUiModel.name
+                priceCoin.text = coinUiModel.price.toFormat()
 
                 Picasso.get()
-                    .load(coin.image)
+                    .load(coinUiModel.imageUrl)
                     .resize(100, 100)
                     .into(imageView)
 
-                if (topList.contains(coin.id)) {
+                if (topList.contains(coinUiModel.id)) {
                     checkIsTrue(check)
                 } else {
                     checkIsFalse(check)
@@ -70,7 +70,7 @@ class CryptoPanelListAdapter(private val onClickListener: (Int, String) -> Unit)
     }
 
     override fun onBindViewHolder(holder: CoinViewHolder, position: Int) {
-        holder.bindTo(getItem(position), position)
+        holder.bindTo(getItem(position))
     }
 
     fun setListTop(set: MutableSet<String>) {
@@ -92,7 +92,6 @@ fun checkOnClickListener(check: CheckedTextView, topList: MutableSet<String>, id
     }
 }
 
-//TODO: funs below replace to class adapter and make them protected or private
 fun checkIsTrue(check: CheckedTextView) {
     check.isChecked = true
     check.setCheckMarkDrawable(R.drawable.star_full)

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptopanel.R
 import com.example.cryptopanel.databinding.FragmentMainBinding
+import com.example.cryptopanel.domain.mapToListUiModels
 import kotlinx.android.synthetic.main.fragment_main.progressBar
 import kotlinx.android.synthetic.main.fragment_main.rv_coins
 import kotlinx.android.synthetic.main.fragment_main.topRateButton
@@ -54,7 +55,7 @@ class FragmentMain : Fragment() {
         viewModel.loadCoins()
 
         viewModel.coinsListLive.observe(viewLifecycleOwner) {
-            adapter.submitList(it).also { progressBar.visibility = View.INVISIBLE }
+            adapter.submitList(it.mapToListUiModels()).also { progressBar.visibility = View.INVISIBLE }
         }
 
         updateUI()

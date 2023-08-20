@@ -1,14 +1,14 @@
 package com.example.cryptopanel.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.cryptopanel.model.Coin
+import com.example.cryptopanel.ui.model.CoinUiModel
 
-class CoinDiffUtil : DiffUtil.ItemCallback<Coin>() {
-    override fun areItemsTheSame(oldItem: Coin, newItem: Coin): Boolean {
+class CoinDiffUtil : DiffUtil.ItemCallback<CoinUiModel>() {
+    override fun areItemsTheSame(oldItem: CoinUiModel, newItem: CoinUiModel): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: Coin, newItem: Coin): Boolean {
+    override fun areContentsTheSame(oldItem: CoinUiModel, newItem: CoinUiModel): Boolean {
         return oldItem == newItem
     }
 }

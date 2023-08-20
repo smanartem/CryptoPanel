@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.cryptopanel.data.retrofit.CoinGeckoApi
-import com.example.cryptopanel.model.Coin
+import com.example.cryptopanel.data.data.retrofit.CoinGeckoApi
+import com.example.cryptopanel.data.data.model.CoinDataModel
 import com.example.cryptopanel.utils.extractListOfString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,10 +14,10 @@ import kotlinx.coroutines.launch
 class CryptoPanelViewModel(private val coinGeckoApi: CoinGeckoApi, app: Application) :
     AndroidViewModel(app) {
 
-    private var listOfCoins: List<Coin> = listOf()
+    private var listOfCoinDataModels: List<CoinDataModel> = listOf()
 
-    private val coinsListMutable = MutableLiveData<List<Coin>>()
-    val coinsListLive: LiveData<List<Coin>> = coinsListMutable
+    private val coinsListMutable = MutableLiveData<List<CoinDataModel>>()
+    val coinsListLive: LiveData<List<CoinDataModel>> = coinsListMutable
 
     fun loadCoins() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -26,24 +26,24 @@ class CryptoPanelViewModel(private val coinGeckoApi: CoinGeckoApi, app: Applicat
         }
     }
 
-    private fun setDataToList(data: List<Coin>) {
-        listOfCoins = data
+    private fun setDataToList(data: List<CoinDataModel>) {
+        listOfCoinDataModels = data
     }
 
-    fun setSortArray(item: List<Coin>) {
+    fun setSortArray(item: List<CoinDataModel>) {
         coinsListMutable.postValue(item)
     }
 
     fun refresh() {
-        coinsListMutable.postValue(listOfCoins)
+        coinsListMutable.postValue(listOfCoinDataModels)
     }
 
     fun getTrend() = viewModelScope.launch {
-        coinsListMutable.postValue(filterIt(getTrendingCoinsString(), listOfCoins))
+        coinsListMutable.postValue(filterIt(getTrendingCoinsString(), listOfCoinDataModels))
     }
 
     fun getTop(array: List<String>) = viewModelScope.launch {
-        coinsListMutable.postValue(filterIt(array, listOfCoins))
+        coinsListMutable.postValue(filterIt(array, listOfCoinDataModels))
     }
 
     private suspend fun getTrendingCoinsString(): List<String> {
@@ -51,12 +51,12 @@ class CryptoPanelViewModel(private val coinGeckoApi: CoinGeckoApi, app: Applicat
     }
 
 
-    fun getData(): List<Coin> {
-        return listOfCoins
+    fun getData(): List<CoinDataModel> {
+        return listOfCoinDataModels
     }
 
-    fun filterIt(s: List<String>, list: List<Coin>): List<Coin> {
-        val tempArray = mutableListOf<Coin>()
+    fun filterIt(s: List<String>, list: List<CoinDataModel>): List<CoinDataModel> {
+        val tempArray = mutableListOf<CoinDataModel>()
 
         s.forEach {
             for (l in list) {
