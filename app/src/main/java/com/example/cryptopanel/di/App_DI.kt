@@ -9,4 +9,4 @@ val viewModelModule = module {
     viewModel { CryptoPanelViewModel(get(), get()) }
 }
 
-val appModule = viewModelModule + networkModule + prefsModule
+val appModule = viewModelModule + networkModule + prefsModule + localDbModule

@@ -40,6 +40,11 @@ android {
 
 dependencies {
     def room_version = "2.5.2"
+    def work_version = "2.8.1"
+
+    //work manager
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+    implementation "androidx.work:work-rxjava2:$work_version"
 
     //Room
     implementation "androidx.room:room-runtime:$room_version"
@@ -66,8 +71,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.0'
     implementation "io.insert-koin:koin-android:3.3.2"
 
 }
