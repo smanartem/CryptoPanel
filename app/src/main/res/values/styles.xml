@@ -10,5 +10,6 @@
         <item name="android:textSize">18sp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:background">@drawable/bg_details_textview</item>
+        <item name="android:padding">16dp</item>
     </style>
 </resources>

@@ -14,8 +14,8 @@
             android:id="@+id/action_fragmentMain_to_fragmentCoinDetails"
             app:destination="@id/fragmentCoinDetails" />
         <action
-            android:id="@+id/action_fragmentMain_to_fragmentTradeHelper"
-            app:destination="@id/fragmentTradeHelper" />
+            android:id="@+id/action_fragmentMain_to_fragmentIndexes"
+            app:destination="@id/fragmentIndexes" />
     </fragment>
     <fragment
         android:id="@+id/fragmentCoinDetails"
@@ -27,7 +27,7 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentTradeHelper"
-        android:name="com.example.cryptopanel.ui.tradeHelper.FragmentTradeHelper"
-        android:label="FragmentTradeHelper" />
+        android:id="@+id/fragmentIndexes"
+        android:name="com.example.cryptopanel.ui.indexes.FragmentIndexes"
+        android:label="FragmentIndexes" />
 </navigation>

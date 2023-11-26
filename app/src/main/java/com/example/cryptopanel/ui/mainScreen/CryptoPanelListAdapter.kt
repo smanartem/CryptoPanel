@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import android.widget.CheckedTextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.cryptopanel.R
 import com.example.cryptopanel.ui.model.CoinUiModel
 import com.example.cryptopanel.utils.CoinDiffUtil
 import com.example.cryptopanel.utils.setColor
 import com.example.cryptopanel.utils.toFormat
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_currency.view.check
 import kotlinx.android.synthetic.main.item_currency.view.dayChange
 import kotlinx.android.synthetic.main.item_currency.view.imageView
@@ -49,9 +49,8 @@ class CryptoPanelListAdapter(private val onClickListener: (Int, String) -> Unit)
                 nameCoin.text = coinUiModel.name
                 priceCoin.text = coinUiModel.price.toFormat()
 
-                Picasso.get()
+                Glide.with(context)
                     .load(coinUiModel.imageUrl)
-                    .resize(100, 100)
                     .into(imageView)
 
                 if (topList.contains(coinUiModel.id)) {

@@ -48,7 +48,7 @@
             android:id="@+id/tabNews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/news_tab_name" />
+            android:text="@string/indexes_tab_name" />
     </com.google.android.material.tabs.TabLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
