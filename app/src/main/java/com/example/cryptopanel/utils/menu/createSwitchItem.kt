@@ -5,8 +5,8 @@ import android.content.SharedPreferences
 import android.view.Menu
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
-import com.example.cryptopanel.MODE
 import com.example.cryptopanel.R
+import com.example.cryptopanel.utils.MODE
 
 fun createSwitchItem(menu: Menu, preferences: SharedPreferences) {
     val switchItem = menu.findItem(R.id.theme_switch)

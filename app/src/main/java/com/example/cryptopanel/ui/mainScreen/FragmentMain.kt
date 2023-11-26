@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptopanel.R
 import com.example.cryptopanel.databinding.FragmentMainBinding
 import com.example.cryptopanel.domain.mapToListUiModels
+import com.example.cryptopanel.utils.TOPLIST
 import kotlinx.android.synthetic.main.fragment_main.progressBar
 import kotlinx.android.synthetic.main.fragment_main.rv_coins
 import kotlinx.android.synthetic.main.fragment_main.topRateButton
@@ -23,8 +24,6 @@ import kotlinx.android.synthetic.main.fragment_main.trendButton
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.core.qualifier.named
-
-const val TOPLIST = "topList"
 
 class FragmentMain : Fragment() {
 
@@ -55,7 +54,8 @@ class FragmentMain : Fragment() {
         viewModel.loadCoins()
 
         viewModel.coinsListLive.observe(viewLifecycleOwner) {
-            adapter.submitList(it.mapToListUiModels()).also { progressBar.visibility = View.INVISIBLE }
+            adapter.submitList(it.mapToListUiModels())
+                .also { progressBar.visibility = View.INVISIBLE }
         }
 
         updateUI()
@@ -92,7 +92,6 @@ class FragmentMain : Fragment() {
             }
         }
     }
-
 
     private fun updateUI() {
         loadPrefs()

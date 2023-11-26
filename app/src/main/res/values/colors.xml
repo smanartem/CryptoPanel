@@ -16,4 +16,8 @@
     <color name="button_taped">#F6F7EB</color>
     <color name="button_untapped">#FFFFFFFF</color>
     <color name="details_color">#1bc3b9</color>
+    <color name="index_textView">#3eed94</color>
+
+    <color name="new_background">#E9EEEA</color>
+    <color name="new_background_lite">#D8DFE9</color>
 </resources>

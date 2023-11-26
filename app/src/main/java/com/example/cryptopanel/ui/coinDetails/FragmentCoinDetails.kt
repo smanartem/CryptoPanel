@@ -6,19 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.cryptopanel.R
 import com.example.cryptopanel.databinding.FragmentCoinDetailsBinding
 import com.example.cryptopanel.domain.mapToListUiModels
 import com.example.cryptopanel.ui.mainScreen.CryptoPanelViewModel
 import com.example.cryptopanel.ui.mainScreen.ID
 import com.example.cryptopanel.ui.model.CoinUiModel
+import com.example.cryptopanel.utils.AXIS_TEXT_SIZE
+import com.example.cryptopanel.utils.HOURS_DAY
 import com.example.cryptopanel.utils.setColor
 import com.example.cryptopanel.utils.toFormat
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_coin_details.chart
 import kotlinx.android.synthetic.main.fragment_coin_details.circulation
 import kotlinx.android.synthetic.main.fragment_coin_details.dayChanges
@@ -29,9 +31,6 @@ import kotlinx.android.synthetic.main.fragment_coin_details.marketCap
 import kotlinx.android.synthetic.main.fragment_coin_details.price
 import kotlinx.android.synthetic.main.fragment_coin_details.rank
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
-
-const val HOURS_DAY = 24
-const val AXIS_TEXT_SIZE = 15f
 
 class FragmentCoinDetails : Fragment() {
 
@@ -69,9 +68,9 @@ class FragmentCoinDetails : Fragment() {
 
         setupLineChart(coinUiModel.sparkline)
 
-        Picasso.get()
+        Glide.with(requireContext())
             .load(coinUiModel.imageUrl)
-            .resize(200, 200)
+            .override(100, 100)
             .into(imageView2)
     }
 

@@ -16,4 +16,6 @@
     <dimen name="item_price_size">18sp</dimen>
     <dimen name="item_dayChange_size">16sp</dimen>
     <dimen name="item_linear_height">24sp</dimen>
+    <dimen name="index_field">128dp</dimen>
+    <dimen name="index_text">32sp</dimen>
 </resources>

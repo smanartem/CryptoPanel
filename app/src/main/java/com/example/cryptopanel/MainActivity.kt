@@ -18,8 +18,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.qualifier.named
 
 
-const val MODE = "mode"
-
 class MainActivity : AppCompatActivity() {
     private val viewModel: CryptoPanelViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
@@ -39,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     private fun setUpUI() {
         tabLayout?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                navController.navigate(if (tab?.position == 0) R.id.fragmentMain else R.id.fragmentTradeHelper)
+                navController.navigate(if (tab?.position == 0) R.id.fragmentMain else R.id.fragmentIndexes)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) = Unit

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">CryptoPanel</string>
     <string name="coins_tab_name">Coins</string>
-    <string name="news_tab_name">TradeHelper</string>
+    <string name="indexes_tab_name">Indexes</string>
     <string name="search">Search</string>
     <string name="switch_theme">Switch theme</string>
     <string name="dark_mode">dark</string>
